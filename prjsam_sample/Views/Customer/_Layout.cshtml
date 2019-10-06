@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+    <title>@ViewBag.Title - </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -25,10 +25,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首頁", "Index", "Home")</li>
-                    <li>@Html.ActionLink("關於", "About", "Home")</li>
-                    <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("員工登入", "Index", "Login")</li>
+                    <li><a href="@Url.Action("Index")">員工列表</a></li>
+                    <li><a href="@Url.Action("Create")">員工新增</a></li>
+                    <li><a href="@Url.Action("Index","Customer")">客戶查詢</a></li>
+                    <li><a href="@Url.Action("Logout")">登出</a></li>
                 </ul>
             </div>
         </div>

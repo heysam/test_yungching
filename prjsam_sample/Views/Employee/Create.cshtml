@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "員工新增";
+}
+
+<h2>員工新增</h2>
+<form method="post" action="@Url.Action("Create")">
+    <p>
+        員工姓名<input type="text" name="fName" required class="form-control" />
+    </p>
+    <p>
+        員工電話<input type="text" name="fPhone" required class="form-control" />
+    </p>
+    <p>
+        員工薪資<input type="number" name="fSalary" required class="form-control" max="100000" min="30000" />
+    </p>
+    <p>
+        員工帳號<input type="text" name="帳號" required class="form-control" />
+    </p>
+    <p>
+        員工密碼<input type="text" name="密碼" required class="form-control" />
+    </p>
+    <p>
+        <input type="submit" value="新增" class="btn btn-success" />
+    </p>
+</form>
+
+
