@@ -22,13 +22,17 @@ jobs:
           url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
           curl --fail-with-body --silent --show-error --max-time 30 "$url" -o sep27-status-now.json
           jq '.' sep27-status-now.json
+          jq -r '.run.events[]? | [(.createdAt//""),(.stage//""),(.status//""),(.provider//""),(.model//""),((.httpStatus//"")|tostring),(.errorCode//""),(.errorMessage//""),((.details//null)|tojson)] | @tsv' sep27-status-now.json > sep27-events.txt
+          cat sep27-events.txt || true
       - name: Commit status
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sep27-status-now.json
+          git add sep27-status-now.json sep27-events.txt
           git commit -m "ops: capture current Sep27 Cloudflare status" || true
           git push
 
 # poll 2
+
+# flatten events
