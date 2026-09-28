@@ -1,0 +1,18 @@
+name: Check Myai Pages Live
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/check-myai-pages-live.yml"
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect Pages canonical deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error --max-time 30             --output /tmp/pages.json --write-out '%{http_code}'             'https://play-ai.cc/api/cloudflare/self-inspect' || true)"
+          echo "HTTP=$code"
+          cat /tmp/pages.json || true
+          exit 0
