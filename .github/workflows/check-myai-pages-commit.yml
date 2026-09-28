@@ -1,0 +1,27 @@
+name: Check Myai Pages Commit
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/check-myai-pages-commit.yml"
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read production deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 30             "https://play-ai.cc/api/cloudflare/self-inspect" -o myai-pages-inspect.json
+          jq '{ok,project:{canonicalDeployment:.project.canonicalDeployment},recentDeployments:.recentDeployments}' myai-pages-inspect.json
+      - name: Persist
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add myai-pages-inspect.json
+          git commit -m "ops: capture Myai Pages commit" || true
+          git push
