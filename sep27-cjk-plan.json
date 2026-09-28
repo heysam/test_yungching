@@ -1,0 +1,11 @@
+{
+  "caption":"Claude Opus 5 與 Qwen3-Max 都是閉源旗艦，但強項路線不同。Claude 更聚焦長上下文、複雜編碼與多步驟 agent 工作流；Qwen3-Max 則整合思考模式、Web 搜尋、資訊提取與 Code Interpreter。真正的選型關鍵，不只是 benchmark 高低，而是你的任務更需要長文件與代理執行，還是完整工具鏈與成本彈性。這組輪播整理兩者在上下文、工具能力與實際應用上的差異，完整分析可到 PLAY AI 筆記閱讀。",
+  "hashtags":["#ClaudeOpus5","#Qwen3Max","#AI模型比較","#代理能力","#上下文窗口"],
+  "slides":[
+    {"index":1,"role":"cover","topicTag":"模型選型比較","headline":"Claude Opus 5 vs Qwen3-Max","highlight":"Qwen3-Max","subheadline":"長上下文、代理工作流與工具整合，兩條路線差在哪？","bullets":["Claude 以 1M 上下文支援長文件與多步驟 agent 任務。","Qwen3-Max 整合思考、Web 搜尋與 Code Interpreter。","選型關鍵在長任務代理能力，還是完整工具鏈整合。"],"takeaway":"差異不只 benchmark，而是整條工作流的適配。","cta":""},
+    {"index":2,"role":"context","topicTag":"上下文與成本","headline":"Qwen3-Max 支援 256K 輸入","highlight":"256K","subheadline":"長文件能力之外，分層計價也直接影響大規模推理成本。","bullets":["最高支援 256K 輸入 token，並按長度分級計價。","0–32K 區間輸入 1.2 美元/百萬 token，輸出 6 美元。","32K–128K 區間輸入 2.4 美元，輸出 12 美元。"],"takeaway":"上下文夠不夠之外，長 prompt 的成本曲線也要一起看。","cta":""},
+    {"index":3,"role":"key-points","topicTag":"核心能力差異","headline":"Claude 更偏長任務 agent 工作流","highlight":"agent 工作流","subheadline":"長上下文、GUI 互動與複雜編碼，是 Claude 路線的核心。","bullets":["支援 Computer Use，可操作 GUI、網頁與桌面應用。","Artifacts 可即時呈現程式碼與文件成果。","Qwen3-Max 思考模式支援 Web 搜尋與 Code Interpreter。"],"takeaway":"Claude 偏代理執行，Qwen 更偏工具整合。","cta":""},
+    {"index":4,"role":"application","topicTag":"實際選型","headline":"真正要比的是整條工作流","highlight":"整條工作流","subheadline":"任務長度、工具依賴與成本結構，比單一 benchmark 更接近實際使用。","bullets":["長文件與多步驟代理，更重視上下文與持續執行能力。","搜尋、程式執行與資料處理，更看工具鏈整合程度。","大量長 prompt 工作負載，還要把分層計價納入評估。"],"takeaway":"先定義工作流，再比較模型能力與成本。","cta":""},
+    {"index":5,"role":"summary-cta","topicTag":"模型選型觀察","headline":"沒有單一贏家，只有任務適配","highlight":"任務適配","subheadline":"把上下文、代理能力、工具整合與成本放在同一張表再決定。","bullets":["觀察推理深度、工具成功率與長任務成本。","持續追蹤官方基準更新與第三方評測。"],"takeaway":"","cta":"到 PLAY AI 筆記閱讀完整比較與來源"}
+  ]
+}
