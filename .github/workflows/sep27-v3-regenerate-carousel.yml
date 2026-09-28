@@ -1,0 +1,128 @@
+name: Sep27 V3 Regenerate Carousel
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-v3-regenerate-carousel.yml"
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for Worker V3
+        shell: bash
+        run: |
+          set -euo pipefail
+          status_url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          expected="2026-09-28-slide-specific-background-v3"
+          ok=0
+          for n in $(seq 1 40); do
+            code="$(curl --silent --show-error --max-time 30 -o /tmp/worker.json -w '%{http_code}' "$status_url" || true)"
+            version="$(jq -r '.visualContractVersion // ""' /tmp/worker.json 2>/dev/null || true)"
+            echo "wait_worker try=$n http=$code version=$version"
+            if [ "$code" = "200" ] && [ "$version" = "$expected" ]; then ok=1; break; fi
+            sleep 15
+          done
+          test "$ok" = "1"
+
+      - name: Reset old Sep27 Instagram derivative
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          code="$(curl --silent --show-error --max-time 60 -o sep27-v3-reset.json -w '%{http_code}'             "${base}?key=${key}&action=reset" || true)"
+          echo "RESET_HTTP=$code"
+          cat sep27-v3-reset.json
+          test "$code" = "200"
+          jq -e '.success == true' sep27-v3-reset.json >/dev/null
+
+      - name: Trigger canonical Cloudflare durable export
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          code="$(curl --silent --show-error --max-time 45 -X POST -o sep27-v3-trigger.json -w '%{http_code}' "$trigger" || true)"
+          echo "TRIGGER_HTTP=$code"
+          cat sep27-v3-trigger.json
+          test "$code" = "200"
+          jq -e '.success == true' sep27-v3-trigger.json >/dev/null
+
+      - name: Poll until 5 of 5 or terminal failure
+        shell: bash
+        run: |
+          set -euo pipefail
+          status_url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          : > sep27-v3-progress.txt
+          ready=0
+          for n in $(seq 1 180); do
+            code="$(curl --silent --show-error --max-time 30 -o /tmp/state.json -w '%{http_code}' "$status_url" || true)"
+            version="$(jq -r '.visualContractVersion // ""' /tmp/state.json 2>/dev/null || true)"
+            rendered="$(jq -r '.instagram.renderedCount // 0' /tmp/state.json 2>/dev/null || echo 0)"
+            run_status="$(jq -r '.run.status // ""' /tmp/state.json 2>/dev/null || true)"
+            stage="$(jq -r '.run.currentStage // ""' /tmp/state.json 2>/dev/null || true)"
+            err="$(jq -r '.run.errorCode // ""' /tmp/state.json 2>/dev/null || true)"
+            echo "$(date -u +%FT%TZ) try=$n http=$code version=$version rendered=$rendered run=$run_status stage=$stage error=$err" | tee -a sep27-v3-progress.txt
+
+            if [ "$code" = "200" ] && [ "$version" = "2026-09-28-slide-specific-background-v3" ] && [ "$rendered" = "5" ] && [ "$(jq -r '.ready // false' /tmp/state.json)" = "true" ]; then
+              cp /tmp/state.json sep27-v3-final.json
+              ready=1
+              break
+            fi
+
+            case "$run_status" in
+              failed|error|errored|terminated|cancelled|canceled)
+                cp /tmp/state.json sep27-v3-final.json
+                echo "terminal failure"
+                cat sep27-v3-final.json
+                exit 1
+                ;;
+            esac
+            sleep 10
+          done
+          test "$ready" = "1"
+
+      - name: Enforce visual and footer evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq '{visualContractVersion,ready,instagram,run}' sep27-v3-final.json
+          test "$(jq -r '.visualContractVersion' sep27-v3-final.json)" = "2026-09-28-slide-specific-background-v3"
+          test "$(jq -r '.instagram.renderedCount' sep27-v3-final.json)" = "5"
+          test "$(jq -r '[.instagram.slides[].mediaUrl] | unique | length' sep27-v3-final.json)" = "5"
+
+          bad="$(jq '[.instagram.slides[] | select(
+            (.imageProvider // "") == "published-blog-hero-fallback" or
+            (.imageProvider // "") == "reused-existing-slide-background" or
+            (.imageModel // "") == "existing-published-blog-hero" or
+            (.imageModel // "") == "reused-existing-carousel-background"
+          )] | length' sep27-v3-final.json)"
+          echo "BAD_BACKGROUND_REUSE_COUNT=$bad"
+          test "$bad" = "0"
+
+          jq -r '.instagram.slides[] | [.index,.imageProvider,.imageModel,.mediaUrl] | @tsv' sep27-v3-final.json
+
+      - name: Download slide 5 for visual QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="$(jq -r '.instagram.slides[] | select(.index==5) | .mediaUrl' sep27-v3-final.json)"
+          test -n "$url"
+          curl --fail-with-body --silent --show-error --max-time 60 "$url" -o sep27-v3-slide5.jpg
+          test -s sep27-v3-slide5.jpg
+
+      - name: Persist final evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-v3-reset.json sep27-v3-trigger.json sep27-v3-progress.txt sep27-v3-final.json sep27-v3-slide5.jpg 2>/dev/null || true
+          git commit -m "ops: capture Sep27 V3 carousel regeneration" || true
+          git push
