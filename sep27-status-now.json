@@ -2,7 +2,7 @@
   "success": true,
   "found": true,
   "contentId": "blog-ig:2026-09-27:1:68",
-  "ready": false,
+  "ready": true,
   "blog": {
     "slug": "ai-note-20260927-1vammfp",
     "title": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
@@ -11,9 +11,55 @@
     "publishedAt": "2026-09-27T13:17:43.006Z"
   },
   "instagram": {
-    "status": "planned",
-    "renderedCount": 0,
-    "slides": [],
+    "status": "rendered",
+    "renderedCount": 5,
+    "slides": [
+      {
+        "index": 1,
+        "role": "cover",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558809328-7abb52a5-8daf-43cc-ba41-bdb63fd07427.jpg",
+        "altText": "Claude Opus 5 and Qwen3-Max model comparison visual",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      },
+      {
+        "index": 2,
+        "role": "context",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558839772-6410b1bc-999d-4d47-92cb-3f3a0b4c1edb.jpg",
+        "altText": "Timeline of Claude Opus 4.6, Claude Opus 5, and Qwen3-Max-2026-01-23 release dates",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      },
+      {
+        "index": 3,
+        "role": "key-points",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558868010-ca7a3cde-4560-4382-9d7f-37cc0996f681.jpg",
+        "altText": "Context window size comparison between Claude Opus 4.6 and Qwen3-Max-2026-01-23",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      },
+      {
+        "index": 4,
+        "role": "application",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558896344-73a9c7d0-d041-4cda-afd9-4f40e3072374.jpg",
+        "altText": "Claude Opus 4.6 coding capability and Qwen3-Max-2026-01-23 tool usage comparison",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      },
+      {
+        "index": 5,
+        "role": "summary-cta",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558927859-54f928bc-407c-4db4-8396-88610d62feb6.jpg",
+        "altText": "Use case comparison between Claude Opus 5 and Qwen3-Max-2026-01-23",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      }
+    ],
     "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備程式開發與 agent 工作流支援。Qwen3-Max-2026-01-23 整合思考／非思考模式並支援 Web 搜尋、資訊提取與 Code Interpreter。兩模型均為閉源權重，僅透過託管 API 提供服務。Claude Opus 4.6 具備 1M token 上下文視窗與 94.2% HumanEval 編碼能力，適合長文件與複雜 agent 任務。",
     "hashtags": [
       "#Claude",
@@ -24,28 +70,28 @@
       "#代理能力"
     ],
     "lastFailure": null,
-    "updatedAt": "2026-09-27T22:13:47.353Z"
+    "updatedAt": "2026-09-28T01:28:48.911Z"
   },
   "run": {
-    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
-    "status": "failed",
-    "currentStage": "instagram-image-1",
-    "failedStage": "instagram-image-1",
-    "provider": "cloudflare-worker",
-    "errorCode": "pipeline-stage-failed",
-    "errorMessage": "NVIDIA FLUX.2-klein-4B 沒有回傳可用 image artifact",
-    "retryable": false,
-    "updatedAt": "2026-09-28T01:23:36.290Z",
-    "completedAt": "2026-09-28T01:23:36.290Z",
+    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
+    "status": "success",
+    "currentStage": "complete",
+    "failedStage": null,
+    "provider": "make",
+    "errorCode": null,
+    "errorMessage": null,
+    "retryable": null,
+    "updatedAt": "2026-09-28T01:28:55.765Z",
+    "completedAt": "2026-09-28T01:28:55.765Z",
     "summary": {
-      "task": "blog-ig-daily",
+      "task": "blog-ig-manual-export",
       "version": "v3",
-      "mode": "publish",
+      "mode": "manual-export",
       "manualExport": true,
-      "resumed": false,
-      "resumeRoute": null,
-      "renderedCount": 0,
-      "blogStatus": null,
+      "resumed": true,
+      "resumeRoute": "blog-published-instagram-pending",
+      "renderedCount": 5,
+      "blogStatus": "published",
       "instagramStatus": null,
       "mediaId": null,
       "permalink": null,
@@ -110,7 +156,7 @@
               "updatedAt": "2026-09-27T13:17:43.006Z"
             },
             "instagram": {
-              "status": "planned",
+              "status": "rendering",
               "planned": true,
               "postType": "knowledge",
               "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
@@ -130,8 +176,13 @@
                 "[truncated-depth]",
                 "[truncated-depth]"
               ],
-              "renderedCount": 0,
-              "slides": [],
+              "renderedCount": 4,
+              "slides": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
               "mediaId": null,
               "permalink": null,
               "carouselContainerId": null,
@@ -139,24 +190,24 @@
               "confirmationMethod": null,
               "publishedAt": null,
               "lastFailure": null,
-              "updatedAt": "2026-09-27T22:13:47.353Z"
+              "updatedAt": "2026-09-28T01:28:17.441Z"
             },
             "run": {
-              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
+              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
               "contentId": "blog-ig:2026-09-27:1:68",
               "mode": "publish",
               "triggerSource": "cloudflare-workflow-manual",
-              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
+              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
               "status": "running",
               "currentStage": "runner-start",
-              "failedStage": null,
+              "failedStage": "instagram-render-checkpoint",
               "provider": "cloudflare-worker",
-              "errorCode": null,
-              "errorMessage": null,
-              "retryable": null,
-              "startedAt": "2026-09-28T01:23:21.620Z",
-              "updatedAt": "2026-09-28T01:23:21.846Z",
-              "completedAt": null,
+              "errorCode": "instagram-render-continuation",
+              "errorMessage": "Instagram render checkpoint persisted: 4/5. Continue in the next durable Workflow pass.",
+              "retryable": false,
+              "startedAt": "2026-09-28T01:26:32.146Z",
+              "updatedAt": "2026-09-28T01:28:29.885Z",
+              "completedAt": "2026-09-28T01:28:23.968Z",
               "summary": {
                 "manual": "[truncated-depth]",
                 "blogOnly": "[truncated-depth]",
@@ -181,10 +232,49 @@
                 "createdAt": "[truncated-depth]"
               },
               "events": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
                 "[truncated-depth]"
               ]
             },
-            "updatedAt": "2026-09-28T01:23:21.846Z"
+            "updatedAt": "2026-09-28T01:28:29.885Z"
           },
           "reused": true
         },
@@ -322,14 +412,14 @@
             "ok": true,
             "status": 200,
             "upstreamStatus": 200,
-            "stage": "instagram-render-prepare-1",
+            "stage": "instagram-render-prepare-5",
             "attempt": 1,
             "data": {
               "success": true,
               "contentId": "blog-ig:2026-09-27:1:68",
               "slug": "ai-note-20260927-1vammfp",
               "complete": false,
-              "renderedCount": 0,
+              "renderedCount": 4,
               "renderSpec": {
                 "version": "[truncated-depth]",
                 "output": "[truncated-depth]",
@@ -350,8 +440,45 @@
             "diagnostic": null,
             "retryable": false,
             "error": null
+          },
+          {
+            "ok": true,
+            "status": 200,
+            "upstreamStatus": 200,
+            "stage": "instagram-render-commit-5",
+            "attempt": 1,
+            "data": {
+              "success": true,
+              "contentId": "blog-ig:2026-09-27:1:68",
+              "slug": "ai-note-20260927-1vammfp",
+              "reused": false,
+              "rendered": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "renderedCount": 5,
+              "complete": true
+            },
+            "quotaExhausted": false,
+            "errorCode": "pipeline-stage-failed",
+            "diagnostic": null,
+            "retryable": false,
+            "error": null
           }
-        ]
+        ],
+        "makeStatus": {
+          "ok": true,
+          "skipped": true,
+          "reason": "manual-export-no-make-publish"
+        },
+        "makePublish": {
+          "ok": true,
+          "skipped": true,
+          "reason": "manual-export-no-make-publish"
+        }
       }
     }
   }
