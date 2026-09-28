@@ -1,0 +1,134 @@
+=== durable attempt 1 ===
+{
+  "success": true,
+  "workflowInstanceId": null,
+  "workflowCreated": null,
+  "workflowAlreadyExists": null,
+  "workflowStatus": null
+}
+attempt=1 poll=1 ready=false rendered=0 run=running stage=runner-start code=
+attempt=1 poll=2 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=3 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=4 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=5 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=6 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=7 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=8 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=9 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=10 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=11 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=12 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=13 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=14 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=15 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=16 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=17 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=18 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=19 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=20 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=21 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=22 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=23 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=24 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=25 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=26 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=27 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=28 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=29 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=30 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=31 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=32 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=33 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=34 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=35 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=36 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=37 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=38 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=39 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=40 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=41 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=42 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=43 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=44 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=45 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=46 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=47 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=48 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=49 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=50 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=51 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=52 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=53 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=54 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=55 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=56 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=57 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=58 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=59 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=60 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=1 poll=61 ready=false rendered=0 run=failed stage=instagram-plan code=workers-ai-quota-exhausted
+{
+  "run": {
+    "status": "failed",
+    "currentStage": "instagram-plan",
+    "errorCode": "workers-ai-quota-exhausted",
+    "errorMessage": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 "
+  },
+  "instagram": {
+    "status": null,
+    "renderedCount": 0
+  }
+}
+=== durable attempt 2 ===
+{
+  "success": true,
+  "workflowInstanceId": null,
+  "workflowCreated": null,
+  "workflowAlreadyExists": null,
+  "workflowStatus": null
+}
+attempt=2 poll=1 ready=false rendered=0 run=running stage=runner-start code=
+attempt=2 poll=2 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=3 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=4 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=5 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=6 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=7 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=8 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=9 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=10 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=11 ready=false rendered=0 run=running stage=instagram-plan code=
+attempt=2 poll=12 ready=false rendered=0 run=failed stage=instagram-render-prepare-1 code=workers-ai-quota-exhausted
+{
+  "run": {
+    "status": "failed",
+    "currentStage": "instagram-render-prepare-1",
+    "errorCode": "workers-ai-quota-exhausted",
+    "errorMessage": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 "
+  },
+  "instagram": {
+    "status": "planned",
+    "renderedCount": 0
+  }
+}
+=== durable attempt 3 ===
+{
+  "success": true,
+  "workflowInstanceId": null,
+  "workflowCreated": null,
+  "workflowAlreadyExists": null,
+  "workflowStatus": null
+}
+attempt=3 poll=1 ready=false rendered=0 run=failed stage=instagram-render-quick-action-1 code=workers-ai-quota-exhausted
+{
+  "run": {
+    "status": "failed",
+    "currentStage": "instagram-render-quick-action-1",
+    "errorCode": "workers-ai-quota-exhausted",
+    "errorMessage": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 "
+  },
+  "instagram": {
+    "status": "planned",
+    "renderedCount": 0
+  }
+}
