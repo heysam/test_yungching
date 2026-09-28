@@ -1,0 +1,66 @@
+name: Sep27 Cloudflare Direct Retry
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-cloudflare-retry.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retry same Cloudflare canonical export
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          status="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+
+          success=false
+          for round in $(seq 1 6); do
+            echo "=== ROUND $round ==="
+            curl --silent --show-error --max-time 60 --output "trigger-$round.json" --write-out 'trigger_http=%{http_code}\n' --request POST "$trigger" || true
+
+            for poll in $(seq 1 30); do
+              curl --silent --show-error --max-time 30 --output sep27-cloudflare-final.json --write-out 'status_http=%{http_code}\n' "$status" || true
+              jq '{ready,contentId,instagram:{status:.instagram.status,renderedCount:.instagram.renderedCount,updatedAt:.instagram.updatedAt},run:{runId:.run.runId,status:.run.status,currentStage:.run.currentStage,failedStage:.run.failedStage,errorCode:.run.errorCode,errorMessage:.run.errorMessage,updatedAt:.run.updatedAt}}' sep27-cloudflare-final.json || true
+
+              if jq -e '.success==true and .ready==true and (.instagram.renderedCount==5)' sep27-cloudflare-final.json >/dev/null 2>&1; then
+                success=true
+                break 2
+              fi
+
+              rs="$(jq -r '.run.status // ""' sep27-cloudflare-final.json 2>/dev/null || true)"
+              case "$rs" in
+                failed|error|errored|terminated|cancelled|canceled)
+                  echo "terminal run status=$rs; retrying Cloudflare workflow"
+                  break
+                  ;;
+              esac
+              sleep 8
+            done
+            sleep 10
+          done
+
+          jq '.' sep27-cloudflare-final.json
+          if [ "$success" != "true" ]; then
+            echo "::error::Sep27 still not 5/5 after bounded direct Cloudflare retries"
+            exit 1
+          fi
+
+      - name: Persist final status
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test -f sep27-cloudflare-final.json || echo '{"missing":true}' > sep27-cloudflare-final.json
+          git add sep27-cloudflare-final.json trigger-*.json 2>/dev/null || true
+          git commit -m "ops: persist Sep27 Cloudflare retry result" || true
+          git push
