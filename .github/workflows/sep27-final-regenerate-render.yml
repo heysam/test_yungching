@@ -1,0 +1,138 @@
+name: Sep27 Final Regenerate and Render
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-final-regenerate-render.yml"
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select acceptable social plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          : > sep27-final-attempts.txt
+          rm -f sep27-final-plan.json
+
+          evaluate_plan() {
+            local file="$1"
+            jq -e '.success == true and .plan and (.plan.slides|length)==5' "$file" >/dev/null 2>&1 || return 1
+
+            local headline tag cover caption
+            headline="$(jq -r '.plan.slides[0].headline // ""' "$file")"
+            tag="$(jq -r '.plan.slides[0].topicTag // ""' "$file")"
+            cover="$(jq -r '[.plan.slides[0].headline,.plan.slides[0].subheadline,.plan.slides[0].bullets[]?,.plan.slides[0].takeaway] | join(" ")' "$file")"
+            caption="$(jq -r '.plan.caption // ""' "$file")"
+
+            if printf '%s %s' "$headline" "$tag" | grep -Eq '發布|發表|上線|20[0-9]{2}.*月|[0-9]{1,2} 月 [0-9]{1,2} 日'; then
+              echo "REJECT date/release lead: $headline" | tee -a sep27-final-attempts.txt
+              return 1
+            fi
+            if printf '%s' "$cover" | grep -Eq '兩者.*閉源|均為閉源|都是閉源|閉源.*API服務|閉源 API'; then
+              echo "REJECT generic closed/API cover point" | tee -a sep27-final-attempts.txt
+              return 1
+            fi
+            if printf '%s' "$cover" | grep -Fq 'Opus 4.6'; then
+              echo "REJECT previous-generation cover data" | tee -a sep27-final-attempts.txt
+              return 1
+            fi
+            if printf '%s' "$caption" | grep -Eq '僅透過託管 API 提供服務|兩者均為閉源 API|兩者皆為閉源 API'; then
+              echo "REJECT overbroad API-only caption" | tee -a sep27-final-attempts.txt
+              return 1
+            fi
+
+            local hits
+            hits="$(printf '%s' "$cover" | grep -Eo '上下文|context|agent|代理|工具|搜尋|Code|Computer|MoE|HumanEval|成本|token|推理|編碼|GUI|Web|長文件|多步驟|視窗' | wc -l | tr -d ' ')"
+            if [ "${hits:-0}" -lt 2 ]; then
+              echo "REJECT insufficient capability signals" | tee -a sep27-final-attempts.txt
+              return 1
+            fi
+            return 0
+          }
+
+          selected=0
+          for attempt in $(seq 1 8); do
+            echo "=== PLAN ATTEMPT $attempt ===" | tee -a sep27-final-attempts.txt
+
+            curl --silent --show-error --max-time 40               "${base}?key=${key}&action=reset"               -o "sep27-final-reset-${attempt}.json" || true
+
+            code="$(curl --silent --show-error --max-time 170               --output "sep27-final-plan-${attempt}.json"               --write-out '%{http_code}'               "${base}?key=${key}&action=plan" || true)"
+            echo "PLAN_HTTP=$code" | tee -a sep27-final-attempts.txt
+
+            if evaluate_plan "sep27-final-plan-${attempt}.json"; then
+              cp "sep27-final-plan-${attempt}.json" sep27-final-plan.json
+              echo "SELECTED_ATTEMPT=$attempt" | tee -a sep27-final-attempts.txt
+              selected=1
+              break
+            fi
+
+            # A 524 can arrive after the model/D1 work continues. Read persisted status before rejecting.
+            sleep 3
+            scode="$(curl --silent --show-error --max-time 30               --output "sep27-final-status-${attempt}.json"               --write-out '%{http_code}'               "${base}?key=${key}&action=status" || true)"
+            echo "STATUS_HTTP=$scode" | tee -a sep27-final-attempts.txt
+            if [ "$scode" = "200" ] && jq -e '.success == true and .planSlides and (.planSlides|length)==5' "sep27-final-status-${attempt}.json" >/dev/null 2>&1; then
+              jq '{success:true,action:"plan-status-recovered",contentId,model:null,plan:{postType:"knowledge",theme:.blogTitle,caption:.caption,hashtags:.hashtags,slides:.planSlides}}'                 "sep27-final-status-${attempt}.json" > "sep27-final-recovered-${attempt}.json"
+              if evaluate_plan "sep27-final-recovered-${attempt}.json"; then
+                cp "sep27-final-recovered-${attempt}.json" sep27-final-plan.json
+                echo "SELECTED_RECOVERED_ATTEMPT=$attempt" | tee -a sep27-final-attempts.txt
+                selected=1
+                break
+              fi
+            fi
+          done
+
+          test "$selected" = "1"
+          jq '{caption:.plan.caption,hashtags:.plan.hashtags,cover:.plan.slides[0],slides:.plan.slides}' sep27-final-plan.json
+
+      - name: Render all five slides
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          rendered=0
+          for pass in $(seq 1 8); do
+            code="$(curl --silent --show-error --max-time 180               --output "sep27-final-render-${pass}.json"               --write-out '%{http_code}'               "${base}?key=${key}&action=render" || true)"
+            echo "RENDER_PASS=$pass HTTP=$code"
+            if [ -s "sep27-final-render-${pass}.json" ]; then
+              jq '{success,renderedCount,partial,remainingSlides,slides}' "sep27-final-render-${pass}.json" || true
+              rendered="$(jq -r '.renderedCount // 0' "sep27-final-render-${pass}.json" 2>/dev/null || echo 0)"
+            fi
+            if [ "${rendered:-0}" -ge 5 ]; then break; fi
+            sleep 3
+          done
+
+          curl --fail-with-body --silent --show-error --max-time 30             "${base}?key=${key}&action=status" -o sep27-final-status.json
+          jq '{success,contentId,blogTitle,instagramStatus,renderedCount,caption,hashtags,captionWithHashtags,planSlides,slides,published}' sep27-final-status.json
+          test "$(jq -r '.renderedCount // 0' sep27-final-status.json)" = "5"
+
+      - name: Verify public URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -r '.slides[].mediaUrl' sep27-final-status.json > sep27-final-urls.txt
+          test "$(wc -l < sep27-final-urls.txt | tr -d ' ')" = "5"
+          while IFS= read -r u; do
+            code="$(curl -L --silent --show-error --output /dev/null --write-out '%{http_code}' --max-time 30 "$u")"
+            echo "$code $u"
+            test "$code" = "200"
+          done < sep27-final-urls.txt
+
+      - name: Persist final evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-final-*.json sep27-final-*.txt 2>/dev/null || true
+          git commit -m "ops: capture final Sep27 regenerated carousel" || true
+          git push
