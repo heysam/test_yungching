@@ -1,0 +1,32 @@
+name: Check Myai IG Policy Marker
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/check-myai-ig-policy-marker.yml"
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error --max-time 30 --output myai-ig-policy-marker.json --write-out '%{http_code}'             'https://play-ai.cc/api/content-v2/policy-version' || true)"
+          echo "HTTP=$code"
+          cat myai-ig-policy-marker.json || true
+          test "$code" = "200"
+          test "$(jq -r '.policy // ""' myai-ig-policy-marker.json)" = "blog-ig-cover-high-salience-v2"
+      - name: Persist
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test -f myai-ig-policy-marker.json || echo '{"missing":true}' > myai-ig-policy-marker.json
+          git add myai-ig-policy-marker.json
+          git commit -m "ops: capture Myai IG policy marker" || true
+          git push
