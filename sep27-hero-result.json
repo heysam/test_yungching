@@ -1,0 +1,391 @@
+{
+  "success": true,
+  "found": true,
+  "contentId": "blog-ig:2026-09-27:1:68",
+  "ready": false,
+  "blog": {
+    "slug": "ai-note-20260927-1vammfp",
+    "title": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+    "status": "published",
+    "heroUrl": "/api/ig/media/image/1790515060643-f910c2bb-3895-48a0-a501-207c04a0c6e5.jpg",
+    "publishedAt": "2026-09-27T13:17:43.006Z"
+  },
+  "instagram": {
+    "status": "rendering",
+    "renderedCount": 1,
+    "slides": [
+      {
+        "index": 1,
+        "role": "cover",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790558809328-7abb52a5-8daf-43cc-ba41-bdb63fd07427.jpg",
+        "altText": "Claude Opus 5 and Qwen3-Max model comparison visual",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "existing-published-blog-hero"
+      }
+    ],
+    "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備程式開發與 agent 工作流支援。Qwen3-Max-2026-01-23 整合思考／非思考模式並支援 Web 搜尋、資訊提取與 Code Interpreter。兩模型均為閉源權重，僅透過託管 API 提供服務。Claude Opus 4.6 具備 1M token 上下文視窗與 94.2% HumanEval 編碼能力，適合長文件與複雜 agent 任務。",
+    "hashtags": [
+      "#Claude",
+      "#Qwen3",
+      "#AI模型比較",
+      "#Anthropic",
+      "#阿里雲",
+      "#代理能力"
+    ],
+    "lastFailure": null,
+    "updatedAt": "2026-09-28T01:26:51.491Z"
+  },
+  "run": {
+    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
+    "status": "failed",
+    "currentStage": "instagram-render-checkpoint",
+    "failedStage": "instagram-render-checkpoint",
+    "provider": "cloudflare-worker",
+    "errorCode": "instagram-render-continuation",
+    "errorMessage": "Instagram render checkpoint persisted: 1/5. Continue in the next durable Workflow pass.",
+    "retryable": false,
+    "updatedAt": "2026-09-28T01:26:58.021Z",
+    "completedAt": "2026-09-28T01:26:58.021Z",
+    "summary": {
+      "task": "blog-ig-daily",
+      "version": "v3",
+      "mode": "publish",
+      "manualExport": true,
+      "resumed": false,
+      "resumeRoute": null,
+      "renderedCount": 0,
+      "blogStatus": null,
+      "instagramStatus": null,
+      "mediaId": null,
+      "permalink": null,
+      "diagnostic": null,
+      "attempts": [],
+      "transportFailures": [],
+      "stages": {
+        "target": {
+          "ok": true,
+          "contentId": "blog-ig:2026-09-27:1:68",
+          "mode": "",
+          "topic": "Model Deep Dive｜Anthropic Claude：以研究當下最新正式可用版本為準，深入研究版本演進、已公開架構與參數資訊、上下文與多模態能力、reasoning、tool/function calling、agent/coding 能力、官方 benchmark 與可信第三方評測、推論速度與成本、API 價格、open/closed weight 與授權、部署方式、最適合與不適合的任務、已知限制與失敗模式，並和上一代及主要競品做有來源的差異比較。優先引用官方文件、model/system card、technical report、API pricing/release notes；未公開資訊不可猜測。",
+          "state": {
+            "ok": true,
+            "date": "2026-09-28",
+            "requestedContentId": "blog-ig:2026-09-27:1:68",
+            "found": true,
+            "state": "blog-published",
+            "publicationConfirmed": false,
+            "contentId": "blog-ig:2026-09-27:1:68",
+            "topic": "Model Deep Dive｜Anthropic Claude：以研究當下最新正式可用版本為準，深入研究版本演進、已公開架構與參數資訊、上下文與多模態能力、reasoning、tool/function calling、agent/coding 能力、官方 benchmark 與可信第三方評測、推論速度與成本、API 價格、open/closed weight 與授權、部署方式、最適合與不適合的任務、已知限制與失敗模式，並和上一代及主要競品做有來源的差異比較。優先引用官方文件、model/system card、technical report、API pricing/release notes；未公開資訊不可猜測。",
+            "researchCreatedAt": "2026-09-27T12:05:41.205Z",
+            "pipeline": {
+              "sourceCount": 9,
+              "factPackComplete": true,
+              "factPackClaimCount": 97,
+              "factPackBatchCount": 9,
+              "factPackCompletedBatchCount": 8,
+              "factPackPartial": true,
+              "factPackMissingBatchIndices": [
+                "[truncated-depth]"
+              ],
+              "researchModel": "nvidia/nemotron-3-super-120b-a12b",
+              "writerModel": "nvidia/nemotron-3-super-120b-a12b",
+              "provider": "nvidia-api",
+              "policy": "nvidia-primary-cloudflare-workers-ai-fallback-no-superbapi"
+            },
+            "steps": {
+              "research": true,
+              "blog": true,
+              "hero": true,
+              "articleVisuals": true,
+              "socialPlan": true,
+              "rendered": false,
+              "blogPublished": true,
+              "instagramPublished": false
+            },
+            "blog": {
+              "slug": "ai-note-20260927-1vammfp",
+              "title": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "status": "published",
+              "hasHero": true,
+              "heroUrl": "/api/ig/media/image/1790515060643-f910c2bb-3895-48a0-a501-207c04a0c6e5.jpg",
+              "visuals": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "visualCount": 3,
+              "publicUrl": "/blog/ai-note-20260927-1vammfp",
+              "publishedAt": "2026-09-27T13:17:43.006Z",
+              "updatedAt": "2026-09-27T13:17:43.006Z"
+            },
+            "instagram": {
+              "status": "planned",
+              "planned": true,
+              "postType": "knowledge",
+              "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備程式開發與 agent 工作流支援。Qwen3-Max-2026-01-23 整合思考／非思考模式並支援 Web 搜尋、資訊提取與 Code Interpreter。兩模型均為閉源權重，僅透過託管 API 提供服務。Claude Opus 4.6 具備 1M token 上下文視窗與 94.2% HumanEval 編碼能力，適合長文件與複雜 agent 任務。",
+              "hashtags": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "plannedSlides": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "renderedCount": 0,
+              "slides": [],
+              "mediaId": null,
+              "permalink": null,
+              "carouselContainerId": null,
+              "reconciled": false,
+              "confirmationMethod": null,
+              "publishedAt": null,
+              "lastFailure": null,
+              "updatedAt": "2026-09-27T22:13:47.353Z"
+            },
+            "run": {
+              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
+              "contentId": "blog-ig:2026-09-27:1:68",
+              "mode": "publish",
+              "triggerSource": "cloudflare-workflow-manual",
+              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685293",
+              "status": "running",
+              "currentStage": "runner-start",
+              "failedStage": null,
+              "provider": "cloudflare-worker",
+              "errorCode": null,
+              "errorMessage": null,
+              "retryable": null,
+              "startedAt": "2026-09-28T01:26:32.146Z",
+              "updatedAt": "2026-09-28T01:26:32.357Z",
+              "completedAt": null,
+              "summary": {
+                "manual": "[truncated-depth]",
+                "blogOnly": "[truncated-depth]",
+                "manualExport": "[truncated-depth]",
+                "requestedContentId": "[truncated-depth]"
+              },
+              "lastEvent": {
+                "id": "[truncated-depth]",
+                "runId": "[truncated-depth]",
+                "contentId": "[truncated-depth]",
+                "stage": "[truncated-depth]",
+                "status": "[truncated-depth]",
+                "provider": "[truncated-depth]",
+                "model": "[truncated-depth]",
+                "attempt": "[truncated-depth]",
+                "httpStatus": "[truncated-depth]",
+                "errorCode": "[truncated-depth]",
+                "errorMessage": "[truncated-depth]",
+                "retryable": "[truncated-depth]",
+                "durationMs": "[truncated-depth]",
+                "details": "[truncated-depth]",
+                "createdAt": "[truncated-depth]"
+              },
+              "events": [
+                "[truncated-depth]"
+              ]
+            },
+            "updatedAt": "2026-09-28T01:26:32.357Z"
+          },
+          "reused": true
+        },
+        "providerRoute": {
+          "ok": true,
+          "provider": "default",
+          "isolated": false
+        },
+        "resume": {
+          "ok": true,
+          "stage": "resume",
+          "route": "blog-published-instagram-pending",
+          "skipped": [
+            "research",
+            "fact-pack",
+            "blog"
+          ]
+        },
+        "research": {
+          "ok": true,
+          "skipped": true,
+          "reason": "blog-already-published"
+        },
+        "factPack": [
+          {
+            "ok": true,
+            "skipped": true,
+            "reason": "blog-already-published"
+          }
+        ],
+        "instagramPlan": {
+          "ok": true,
+          "status": 200,
+          "upstreamStatus": 200,
+          "stage": "instagram-plan",
+          "attempt": 1,
+          "data": {
+            "success": true,
+            "runMode": "plan",
+            "contentId": "blog-ig:2026-09-27:1:68",
+            "mode": "knowledge",
+            "topic": "Model Deep Dive｜Anthropic Claude：以研究當下最新正式可用版本為準，深入研究版本演進、已公開架構與參數資訊、上下文與多模態能力、reasoning、tool/function calling、agent/coding 能力、官方 benchmark 與可信第三方評測、推論速度與成本、API 價格、open/closed weight 與授權、部署方式、最適合與不適合的任務、已知限制與失敗模式，並和上一代及主要競品做有來源的差異比較。優先引用官方文件、model/system card、technical report、API pricing/release notes；未公開資訊不可猜測。",
+            "blog": {
+              "slug": "ai-note-20260927-1vammfp",
+              "status": "published",
+              "mode": "knowledge",
+              "title": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "excerpt": "Claude Opus 5 於 2026 年 7 月 24 日發布，為 Anthropic 在該時間點的前沿文字與 agent 對手模型。 Claude Fable 5.1 與 Claude Mythos 5.1 均於 2026 年 9 月 1 日發布，為同一底層模型的不同安全防護層級版本：Fable 5.1 為一般可用版，Mythos 5.1 僅透過可信存取計畫提供，主要面向資安與生命科學研究。",
+              "blocks": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "heroUrl": "/api/ig/media/image/1790515060643-f910c2bb-3895-48a0-a501-207c04a0c6e5.jpg",
+              "publishedAt": "2026-09-27T13:17:43.006Z"
+            },
+            "socialPlan": {
+              "postType": "knowledge",
+              "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備程式開發與 agent 工作流支援。Qwen3-Max-2026-01-23 整合思考／非思考模式並支援 Web 搜尋、資訊提取與 Code Interpreter。兩模型均為閉源權重，僅透過託管 API 提供服務。Claude Opus 4.6 具備 1M token 上下文視窗與 94.2% HumanEval 編碼能力，適合長文件與複雜 agent 任務。",
+              "hashtags": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "captionWithHashtags": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備程式開發與 agent 工作流支援。Qwen3-Max-2026-01-23 整合思考／非思考模式並支援 Web 搜尋、資訊提取與 Code Interpreter。兩模型均為閉源權重，僅透過託管 API 提供服務。Claude Opus 4.6 具備 1M token 上下文視窗與 94.2% HumanEval 編碼能力，適合長文件與複雜 agent 任務。 #Claude #Qwen3 #AI模型比較 #Anthropic #阿里雲 #代理能力",
+              "slides": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ]
+            },
+            "stages": {
+              "topic": {
+                "status": "[truncated-depth]",
+                "mode": "[truncated-depth]",
+                "topic": "[truncated-depth]",
+                "cursor": "[truncated-depth]",
+                "topicIndex": "[truncated-depth]",
+                "selectedAutomatically": "[truncated-depth]",
+                "resumedFromD1": "[truncated-depth]",
+                "contentId": "[truncated-depth]"
+              },
+              "blog": {
+                "status": "[truncated-depth]",
+                "reused": "[truncated-depth]",
+                "slug": "[truncated-depth]",
+                "blogStatus": "[truncated-depth]"
+              },
+              "hero": {
+                "status": "[truncated-depth]",
+                "reason": "[truncated-depth]"
+              },
+              "social": {
+                "status": "[truncated-depth]",
+                "reused": "[truncated-depth]",
+                "ms": "[truncated-depth]",
+                "slides": "[truncated-depth]",
+                "review": "[truncated-depth]",
+                "models": "[truncated-depth]"
+              }
+            }
+          },
+          "quotaExhausted": false,
+          "errorCode": "pipeline-stage-failed",
+          "diagnostic": null,
+          "retryable": false,
+          "error": null
+        },
+        "instagramRender": [
+          {
+            "ok": true,
+            "status": 200,
+            "upstreamStatus": 200,
+            "stage": "instagram-render-prepare-1",
+            "attempt": 1,
+            "data": {
+              "success": true,
+              "contentId": "blog-ig:2026-09-27:1:68",
+              "slug": "ai-note-20260927-1vammfp",
+              "complete": false,
+              "renderedCount": 0,
+              "renderSpec": {
+                "version": "[truncated-depth]",
+                "output": "[truncated-depth]",
+                "brand": "[truncated-depth]",
+                "slide": "[truncated-depth]",
+                "image": "[truncated-depth]"
+              },
+              "metadata": {
+                "index": "[truncated-depth]",
+                "role": "[truncated-depth]",
+                "altText": "[truncated-depth]",
+                "templateVersion": "[truncated-depth]",
+                "imageModel": "[truncated-depth]"
+              }
+            },
+            "quotaExhausted": false,
+            "errorCode": "pipeline-stage-failed",
+            "diagnostic": null,
+            "retryable": false,
+            "error": null
+          },
+          {
+            "ok": true,
+            "status": 200,
+            "upstreamStatus": 200,
+            "stage": "instagram-render-commit-1",
+            "attempt": 1,
+            "data": {
+              "success": true,
+              "contentId": "blog-ig:2026-09-27:1:68",
+              "slug": "ai-note-20260927-1vammfp",
+              "reused": false,
+              "rendered": [
+                "[truncated-depth]"
+              ],
+              "renderedCount": 1,
+              "complete": false
+            },
+            "quotaExhausted": false,
+            "errorCode": "pipeline-stage-failed",
+            "diagnostic": null,
+            "retryable": false,
+            "error": null
+          }
+        ]
+      }
+    }
+  }
+}
