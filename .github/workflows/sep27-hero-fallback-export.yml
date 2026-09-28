@@ -1,0 +1,53 @@
+name: Sep27 Hero Fallback Export
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-hero-fallback-export.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger Cloudflare after deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          status="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+
+          sleep 35
+          curl --silent --show-error --max-time 60 --output sep27-hero-trigger.json --write-out 'trigger_http=%{http_code}\n' --request POST "$trigger" || true
+
+          for attempt in $(seq 1 120); do
+            curl --silent --show-error --max-time 30 --output sep27-hero-result.json --write-out 'status_http=%{http_code}\n' "$status" || true
+            jq '{ready,instagram:{status:.instagram.status,renderedCount:.instagram.renderedCount,updatedAt:.instagram.updatedAt},run:{runId:.run.runId,status:.run.status,currentStage:.run.currentStage,failedStage:.run.failedStage,errorCode:.run.errorCode,errorMessage:.run.errorMessage,updatedAt:.run.updatedAt}}' sep27-hero-result.json || true
+            if jq -e '.success==true and .ready==true and (.instagram.renderedCount==5)' sep27-hero-result.json >/dev/null 2>&1; then
+              exit 0
+            fi
+            rs="$(jq -r '.run.status // ""' sep27-hero-result.json 2>/dev/null || true)"
+            if [ "$rs" = "failed" ] || [ "$rs" = "errored" ] || [ "$rs" = "terminated" ]; then
+              exit 1
+            fi
+            sleep 8
+          done
+          exit 1
+
+      - name: Persist Cloudflare result
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test -f sep27-hero-result.json || echo '{"missing":true}' > sep27-hero-result.json
+          git pull --rebase origin master
+          git add sep27-hero-result.json sep27-hero-trigger.json 2>/dev/null || true
+          git commit -m "ops: capture Sep27 hero fallback export result" || true
+          git push
