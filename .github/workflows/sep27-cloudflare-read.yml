@@ -1,0 +1,56 @@
+name: Sep27 Cloudflare Direct Read
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-cloudflare-read.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trigger and read Cloudflare Sep27 export
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          status="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+
+          tcode="$(curl --silent --show-error --max-time 60 --output sep27-trigger.json --write-out '%{http_code}' --request POST "$trigger" || true)"
+          echo "trigger HTTP $tcode"
+          cat sep27-trigger.json || true
+
+          for attempt in $(seq 1 150); do
+            scode="$(curl --silent --show-error --max-time 30 --output sep27-cloudflare-result.json --write-out '%{http_code}' "$status" || true)"
+            echo "status HTTP $scode attempt=$attempt"
+            if [ "$scode" = "200" ]; then
+              jq '{success,ready,contentId,blog,instagram:{status:.instagram.status,renderedCount:.instagram.renderedCount,slides:.instagram.slides,caption:.instagram.caption,hashtags:.instagram.hashtags,lastFailure:.instagram.lastFailure,updatedAt:.instagram.updatedAt},run}' sep27-cloudflare-result.json || true
+              if jq -e '.success==true and .ready==true and (.instagram.renderedCount==5)' sep27-cloudflare-result.json >/dev/null 2>&1; then
+                break
+              fi
+            fi
+            sleep 8
+          done
+
+          test -s sep27-cloudflare-result.json
+          jq '.' sep27-cloudflare-result.json
+          test "$(jq -r '.success // false' sep27-cloudflare-result.json)" = "true"
+          test "$(jq -r '.ready // false' sep27-cloudflare-result.json)" = "true"
+          test "$(jq -r '.instagram.renderedCount // 0' sep27-cloudflare-result.json)" = "5"
+
+      - name: Persist result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sep27-cloudflare-result.json sep27-trigger.json
+          git commit -m "ops: capture Sep27 Cloudflare IG export result" || true
+          git push
