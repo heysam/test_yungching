@@ -19,3 +19,5 @@ jobs:
           curl --fail-with-body --silent --show-error --max-time 30             'https://play-ai.cc/api/content-v2/status?date=2026-09-27&contentId=blog-ig%3A2026-09-27%3A1%3A68'             -o /tmp/content.json
           echo "=== EVENTS ==="
           jq -r '.run.events[]? | [(.createdAt//""),(.stage//""),(.status//""),(.provider//""),(.model//""),((.httpStatus//"")|tostring),(.errorCode//""),(.errorMessage//"")] | @tsv' /tmp/content.json
+
+# refresh 1790580041893
