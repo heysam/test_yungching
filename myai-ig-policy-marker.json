@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0B">
+<!-- 一個 404 被索引，等於讓搜尋結果裡多一筆點進來就沒東西的連結。 -->
+<meta name="robots" content="noindex, follow">
+<title>找不到這個頁面｜PLAY AI</title>
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- 只沿用 blog 的閱讀層樣式。這頁不需要主應用那 115 支 runtime，
+     載進來只會讓一個純文字頁面付出整個聊天介面的成本。 -->
+<link rel="stylesheet" href="/blog.css">
+<style>
+  body{
+    min-height:100dvh;display:flex;align-items:center;justify-content:center;
+    padding:32px 22px;background:var(--bg);
+  }
+  .nf{max-width:32rem;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+  .nf .code{
+    font:600 12px/1 var(--font-brand);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .nf h1{font:700 clamp(26px,6vw,34px)/1.25 var(--font-head);color:var(--text);margin:0}
+  .nf p{font-size:15.5px;line-height:1.8;color:var(--read);margin:0}
+  .nf .go{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .nf a.btn{
+    padding:12px 22px;border-radius:999px;font:600 14px/1 var(--font-read);
+    text-decoration:none;transition:background .15s,border-color .15s;
+  }
+  .nf a.solid{background:var(--accent);color:#0A0A0B}
+  .nf a.solid:hover{background:var(--knowledge)}
+  .nf a.ghost{border:1px solid var(--rule);color:var(--text)}
+  .nf a.ghost:hover{border-color:var(--accent)}
+  .nf img{width:40px;height:40px}
+</style>
+</head>
+<body>
+  <main class="nf">
+    <img src="/logo.svg" alt="" width="40" height="40">
+    <span class="code">404</span>
+    <h1>這個頁面不在這裡</h1>
+    <p>網址可能打錯了，或這篇內容已經換過位置。下面兩個入口都還在。</p>
+    <div class="go">
+      <a class="btn solid" href="/">回到對話</a>
+      <a class="btn ghost" href="/blog">看文章</a>
+    </div>
+  </main>
+</body>
+</html>
