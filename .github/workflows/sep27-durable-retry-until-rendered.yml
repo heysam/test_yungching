@@ -1,0 +1,73 @@
+name: Sep27 Durable Retry Until Rendered
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-durable-retry-until-rendered.yml"
+permissions:
+  contents: write
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retry canonical Cloudflare workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          status="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          rm -f sep27-retry-final.json sep27-retry-log.txt
+
+          for outer in 1 2 3; do
+            echo "=== durable attempt $outer ===" | tee -a sep27-retry-log.txt
+            curl --silent --show-error --max-time 60 --request POST "$trigger" -o "/tmp/trigger-$outer.json" || true
+            jq '{success,workflowInstanceId,workflowCreated,workflowAlreadyExists,workflowStatus}' "/tmp/trigger-$outer.json" 2>/dev/null | tee -a sep27-retry-log.txt || cat "/tmp/trigger-$outer.json" | tee -a sep27-retry-log.txt
+
+            terminal=""
+            for poll in $(seq 1 75); do
+              curl --fail-with-body --silent --show-error --max-time 30 "$status" -o /tmp/status.json
+              ready="$(jq -r '.ready // false' /tmp/status.json)"
+              count="$(jq -r '.instagram.renderedCount // 0' /tmp/status.json)"
+              rs="$(jq -r '.run.status // ""' /tmp/status.json)"
+              stage="$(jq -r '.run.currentStage // ""' /tmp/status.json)"
+              code="$(jq -r '.run.errorCode // ""' /tmp/status.json)"
+              echo "attempt=$outer poll=$poll ready=$ready rendered=$count run=$rs stage=$stage code=$code" | tee -a sep27-retry-log.txt
+
+              if [ "$ready" = "true" ] && [ "$count" = "5" ]; then
+                cp /tmp/status.json sep27-retry-final.json
+                exit 0
+              fi
+              case "$rs" in failed|errored|terminated)
+                terminal="$rs"
+                cp /tmp/status.json "/tmp/terminal-$outer.json"
+                break
+                ;;
+              esac
+              sleep 8
+            done
+
+            if [ -z "$terminal" ]; then
+              echo "attempt $outer did not reach terminal within polling window" | tee -a sep27-retry-log.txt
+              cp /tmp/status.json "/tmp/terminal-$outer.json"
+            fi
+            jq '{run:{status:.run.status,currentStage:.run.currentStage,errorCode:.run.errorCode,errorMessage:.run.errorMessage},instagram:{status:.instagram.status,renderedCount:.instagram.renderedCount}}' "/tmp/terminal-$outer.json" | tee -a sep27-retry-log.txt || true
+            sleep 5
+          done
+
+          cp /tmp/status.json sep27-retry-final.json
+          exit 1
+
+      - name: Persist result
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test -f sep27-retry-final.json || echo '{"missing":true}' > sep27-retry-final.json
+          test -f sep27-retry-log.txt || touch sep27-retry-log.txt
+          git add sep27-retry-final.json sep27-retry-log.txt
+          git commit -m "ops: capture Sep27 durable retry result" || true
+          git pull --rebase origin master || true
+          git push || true
