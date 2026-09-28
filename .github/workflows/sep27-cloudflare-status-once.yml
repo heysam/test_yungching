@@ -1,0 +1,32 @@
+name: Sep27 Cloudflare Status Once
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-cloudflare-status-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read status once
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          curl --fail-with-body --silent --show-error --max-time 30 "$url" -o sep27-status-now.json
+          jq '.' sep27-status-now.json
+      - name: Commit status
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sep27-status-now.json
+          git commit -m "ops: capture current Sep27 Cloudflare status" || true
+          git push
