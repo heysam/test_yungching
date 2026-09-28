@@ -7,51 +7,33 @@ on:
       - ".github/workflows/sep27-cloudflare-status-once.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   status:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - name: Read status once
+      - name: Read current plan and image evidence
         shell: bash
         run: |
           set -euo pipefail
-          url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
-          curl --fail-with-body --silent --show-error --max-time 30 "$url" -o sep27-status-now.json
-          jq '.' sep27-status-now.json
-          curl --fail-with-body --silent --show-error --max-time 30 'https://play-ai.cc/api/content-v2/status?date=2026-09-27&contentId=blog-ig%3A2026-09-27%3A1%3A68' -o sep27-content-status.json
-          jq -r '.run.events[]? | [(.createdAt//""),(.stage//""),(.status//""),(.provider//""),(.model//""),((.httpStatus//"")|tostring),(.errorCode//""),(.errorMessage//""),((.details//null)|tojson)] | @tsv' sep27-content-status.json > sep27-events.txt
-          cat sep27-events.txt || true
-      - name: Commit status
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sep27-status-now.json sep27-content-status.json sep27-events.txt
-          git commit -m "ops: capture current Sep27 Cloudflare status" || true
-          git push
+          curl --fail-with-body --silent --show-error --max-time 30             'https://play-ai.cc/api/content-v2/status?date=2026-09-27&contentId=blog-ig%3A2026-09-27%3A1%3A68'             -o /tmp/status.json
+          echo '=== PLAN ==='
+          jq '{
+            instagram:{
+              status:.data.instagram.status,
+              renderedCount:.data.instagram.renderedCount,
+              caption:.data.instagram.caption,
+              hashtags:.data.instagram.hashtags,
+              plannedSlides:.data.instagram.plannedSlides,
+              slides:.data.instagram.slides
+            }
+          }' /tmp/status.json
+          echo '=== IMAGE/PLAN EVENTS ==='
+          jq -r '.run.events[]? 
+            | select((.stage//"")|test("instagram-(plan|image|browser|render)"))
+            | [(.createdAt//""),(.stage//""),(.status//""),(.provider//""),(.model//""),((.httpStatus//"")|tostring),(.errorCode//""),(.errorMessage//""),((.details//null)|tojson)] 
+            | @tsv' /tmp/status.json
 
-# poll 2
-
-# flatten events
-
-# fetch content status
-
-# refresh final 5of5
-
-# refresh after plan 524 1790562704251
-
-# progress check 1790562916486
-
-# readonly check 1790584658117
-
-# readonly check 1790584760278
-
-# readonly check 1790585113933
-
-# readonly check 1790585191095
-
-# readonly followup 1790585485010
+# plan-evidence 1790585548833
