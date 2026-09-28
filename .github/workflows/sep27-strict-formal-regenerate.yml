@@ -115,3 +115,5 @@ jobs:
           git add sep27-strict-*.json sep27-strict-progress.txt sep27-strict-images/*.jpg 2>/dev/null || true
           git commit -m "ops: capture Sep27 strict formal regeneration" || true
           git push
+
+# retrigger 1790579991395 strict
