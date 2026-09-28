@@ -9,25 +9,31 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Reset and regenerate plan
+      - name: Generate plan only after Sep20 restore
         shell: bash
         run: |
           set -euo pipefail
           base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
           key="sep27-9f27c4-regenerate-export"
-          curl --fail-with-body --silent --show-error --max-time 60             "${base}?key=${key}&action=reset" -o sep27-reset.json
-          cat sep27-reset.json
-          curl --fail-with-body --silent --show-error --max-time 180             "${base}?key=${key}&action=plan" -o sep27-plan.json
-          jq '{success,action,contentId,reused,model,cover:(.plan.slides[0]),caption:.plan.caption,hashtags:.plan.hashtags}' sep27-plan.json
+          code="$(curl --silent --show-error --max-time 170             -o sep27-plan.json -w '%{http_code}'             "${base}?key=${key}&action=plan" || true)"
+          echo "PLAN_HTTP=$code"
+          cat sep27-plan.json || true
+          sleep 5
+          curl --fail-with-body --silent --show-error --max-time 30             "${base}?key=${key}&action=status" -o sep27-plan-status.json
+          jq '{success,instagramStatus,renderedCount,caption,hashtags,cover:(.planSlides[0] // null),slideCount:(.planSlides|length)}' sep27-plan-status.json
+          test "$(jq -r '(.planSlides|length) // 0' sep27-plan-status.json)" = "5"
       - name: Persist
+        if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sep27-reset.json sep27-plan.json
-          git commit -m "ops: capture Sep27 regenerated plan" || true
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-plan.json sep27-plan-status.json 2>/dev/null || true
+          git commit -m "ops: capture Sep27 plan after Sep20 restore" || true
           git push
-
-# rerun 1790584097291 sep25-background-contract
+# ORIGINAL_BACKUP_HASH 6531a9cbe88313562b65633780c82d01a71d5fb6
