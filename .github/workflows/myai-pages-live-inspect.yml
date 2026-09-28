@@ -1,0 +1,27 @@
+name: Myai Pages Live Inspect
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/myai-pages-live-inspect.yml"
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect production Pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 45             'https://play-ai.cc/api/cloudflare/self-inspect' -o /tmp/inspect.json
+          jq '{
+            ok,
+            project:{
+              name:.project.name,
+              productionBranch:.project.productionBranch,
+              sourceType:.project.sourceType,
+              canonicalDeployment:.project.canonicalDeployment
+            },
+            recentDeployments:.recentDeployments
+          }' /tmp/inspect.json
