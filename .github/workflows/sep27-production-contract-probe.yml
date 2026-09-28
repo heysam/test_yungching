@@ -1,0 +1,26 @@
+name: Sep27 Production Contract Probe
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-production-contract-probe.yml"
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Worker and Pages contract versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          worker="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          pages="https://play-ai.cc/api/content-v2/policy-version"
+
+          wcode="$(curl --silent --show-error --max-time 30 -o worker.json -w '%{http_code}' "$worker" || true)"
+          pcode="$(curl --silent --show-error --max-time 30 -o pages.json -w '%{http_code}' "$pages" || true)"
+          echo "WORKER_HTTP=$wcode"
+          cat worker.json || true
+          echo "PAGES_HTTP=$pcode"
+          cat pages.json || true
+
+          echo "WORKER_VISUAL_CONTRACT=$(jq -r '.visualContractVersion // ""' worker.json 2>/dev/null || true)"
+          echo "PAGES_POLICY=$(jq -r '.policy // ""' pages.json 2>/dev/null || true)"
