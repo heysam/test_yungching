@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "action": "plan",
+  "contentId": "blog-ig:2026-09-27:1:68",
+  "reused": false,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "plan": {
+    "postType": "knowledge",
+    "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+    "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備 1M token 上下文窗口與 64 專家 MoE 架構，每 token 活躍參數 40-60B，在 HumanEval 上達 94.2%。Qwen3-Max-2026-01-23 支援 256K 輸入長度，思考模式可使用 Web 搜尋與 Code Interpreter，但無法自行部署。兩者皆為閉源模型，僅透過託管 API 提供服務。Claude Opus 5 在代理工作流與長文件處理上具潛在優勢，適合複雜編碼與多步驟任務。Qwen3-Max 在中文工具基線與成本結構上具備特色。觀察兩者在推理深度與工具整合上的發展方向，有助於選型與應用規劃。立即閱讀完整分析，了解最新模型能力與限制。",
+    "hashtags": [
+      "#ClaudeOpus5",
+      "#Qwen3Max",
+      "#AI模型比較",
+      "#代理能力",
+      "#上下文窗口"
+    ],
+    "captionWithHashtags": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備 1M token 上下文窗口與 64 專家 MoE 架構，每 token 活躍參數 40-60B，在 HumanEval 上達 94.2%。Qwen3-Max-2026-01-23 支援 256K 輸入長度，思考模式可使用 Web 搜尋與 Code Interpreter，但無法自行部署。兩者皆為閉源模型，僅透過託管 API 提供服務。Claude Opus 5 在代理工作流與長文件處理上具潛在優勢，適合複雜編碼與多步驟任務。Qwen3-Max 在中文工具基線與成本結構上具備特色。觀察兩者在推理深度與工具整合上的發展方向，有助於選型與應用規劃。立即閱讀完整分析，了解最新模型能力與限制。\n\n#ClaudeOpus5 #Qwen3Max #AI模型比較 #代理能力 #上下文窗口",
+    "slides": [
+      {
+        "index": 1,
+        "role": "cover",
+        "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+        "topicTag": "Claude Opus 5 發布",
+        "headline": "Claude Opus 5 於 2026 年 7 月 24 日發布",
+        "highlight": "2026 年 7 月 24 日",
+        "subheadline": "Anthropic 前沿文字與 agent 模型，標誌長上下文與代理能力最新進展。",
+        "bullets": [
+          "具備 100 萬 token 上下文窗口，是前代 4 倍。",
+          "採用 64 專家 MoE 架構，每 token 活躍 40-60B 參數。",
+          "HumanEval 達 94.2% pass@1，編碼推理領先。"
+        ],
+        "takeaway": "長上下文、高效 MoE、卓越編碼為三大突破。",
+        "cta": "",
+        "visualPrompt": "A futuristic AI brain with interconnected nodes forming a circuit pattern, glowing with blue and purple light, abstract technology background",
+        "layout": "cover",
+        "altText": "抽象科技風格的 AI 神經網路圖像，藍紫色光點連結成複雜結構"
+      },
+      {
+        "index": 2,
+        "role": "context",
+        "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+        "topicTag": "Qwen3-Max 背景",
+        "headline": "Qwen3-Max 支援 256K 輸入 token 長度",
+        "highlight": "256K 輸入 token",
+        "subheadline": "阿里雲 Model Studio 2026 年 1 月 23 日快照版本，整合思考與非思考模式。",
+        "bullets": [
+          "最高支援 256K 輸入 token，按長度分級計價。",
+          "0–32K 區間輸入 1.2 美元/百萬 token，輸出 6 美元。",
+          "32K–128K 區間輸入 2.4 美元，輸出 12 美元。"
+        ],
+        "takeaway": "提供彈性長文件處理與分層定價，但無自行部署。",
+        "cta": "",
+        "visualPrompt": "A cloud computing interface with data streams flowing into a central AI model icon, showing input tokens and cost tiers",
+        "layout": "context",
+        "altText": "雲端運算介面圖示，資料流進入 AI 模型圖示，旁邊標示輸入長度與費用分級"
+      },
+      {
+        "index": 3,
+        "role": "key-points",
+        "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+        "topicTag": "核心能力差異",
+        "headline": "Claude Opus 5 在代理工作流與長文件處理上具優勢",
+        "highlight": "代理工作流",
+        "subheadline": "Claude Opus 5 支援程式開發與 agent 工作流，適合長文件與多步驟任務。",
+        "bullets": [
+          "支援 Computer Use 能力，可操作 GUI、網頁與桌面應用。",
+          "Artifacts 功能允許即時渲染程式碼與文件。",
+          "Qwen3-Max 思考模式支援 Web 搜尋與 Code Interpreter。"
+        ],
+        "takeaway": "Claude 強調桌面互動與即時渲染，Qwen 側重網路工具鏈。",
+        "cta": "",
+        "visualPrompt": "Split screen: left side shows AI interacting with desktop GUI, right side shows AI using web search and code interpreter in a browser",
+        "layout": "key-points",
+        "altText": "分屏圖示：左側為 AI 操作桌面介面，右側為 AI 使用網頁搜尋與程式碼解釋器"
+      },
+      {
+        "index": 4,
+        "role": "application",
+        "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+        "topicTag": "實際應用適配",
+        "headline": "Claude Opus 5 適合複雜編碼與多步驟代理任務",
+        "highlight": "複雜編碼",
+        "subheadline": "Claude Opus 5 展現領先 agentic 編碼能力，含極少人工介入建構 C 編譯器。",
+        "bullets": [
+          "Claude 系列為閉源權重，僅透過 Anthropic API 提供服務。",
+          "Claude Opus 4.6 使用 Constitutional AI 進行對齊訓練。",
+          "Qwen3-Max 同為閉源模型，僅限 Model Studio 託管使用。"
+        ],
+        "takeaway": "兩模型皆為閉源託管，選型依代理互動與外部工具需求。",
+        "cta": "",
+        "visualPrompt": "Two AI assistants side by side: one coding in a terminal with multiple windows, the other researching with web browser and code panel",
+        "layout": "application",
+        "altText": "兩個 AI 助理並排示意圖：左側在終端機編碼，右側在瀏覽器中搜尋資訊並使用程式碼面板"
+      },
+      {
+        "index": 5,
+        "role": "summary-cta",
+        "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+        "topicTag": "模型選型觀察",
+        "headline": "選擇取決於代理互動與網路工具需求",
+        "highlight": "代理互動",
+        "subheadline": "Claude Opus 5 在 GUI 互動、即時渲染與長上下文編碼具優勢。",
+        "bullets": [
+          "觀察推理深度、工具成功率與長任務成本表現。",
+          "關注安全防護層級與授權限制，特別是敏感領域。",
+          "持續追蹤官方基準更新與第三方評測結果。"
+        ],
+        "takeaway": "",
+        "cta": "立即閱讀完整分析，了解詳細比較與應用建議",
+        "visualPrompt": "A magnifying glass over a split AI model comparison chart showing tokens, tools, and cost metrics",
+        "layout": "summary-cta",
+        "altText": "放大鏡檢視 AI 模型比較圖表，圖表內含 token 長度、工具支援與費用指標"
+      }
+    ]
+  }
+}
