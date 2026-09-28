@@ -1,0 +1,46 @@
+name: Sep27 Wait Worker V3
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-wait-worker-v3.yml"
+permissions:
+  contents: write
+jobs:
+  wait:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Cloudflare Worker native deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          expected="2026-09-28-slide-specific-background-v3"
+          : > sep27-worker-v3-probe.txt
+          ok=0
+          for n in $(seq 1 36); do
+            code="$(curl --silent --show-error --max-time 30 -o /tmp/state.json -w '%{http_code}' "$url" || true)"
+            version="$(jq -r '.visualContractVersion // ""' /tmp/state.json 2>/dev/null || true)"
+            echo "$(date -u +%FT%TZ) try=$n http=$code version=$version" | tee -a sep27-worker-v3-probe.txt
+            if [ "$code" = "200" ] && [ "$version" = "$expected" ]; then
+              cp /tmp/state.json sep27-worker-v3-state.json
+              ok=1
+              break
+            fi
+            sleep 15
+          done
+          test "$ok" = "1"
+
+      - name: Persist probe evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-worker-v3-probe.txt sep27-worker-v3-state.json 2>/dev/null || true
+          git commit -m "ops: capture Sep27 Worker V3 deploy evidence" || true
+          git push
