@@ -1,0 +1,51 @@
+name: Sep27 Stage Corrected Slides to R2
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-stage-corrected-r2.yml"
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage rendered slides
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '[]' > sep27-r2-results.json
+          for i in 1 2 3 4 5; do
+            src="https://raw.githubusercontent.com/heysam/test_yungching/master/sep27-rendered/slide-${i}.png"
+            jq -cn --arg sourceUrl "$src" '{sourceUrl:$sourceUrl,mediaType:"image"}' > /tmp/body.json
+            code="$(curl --silent --show-error --max-time 90               --output "/tmp/stage-${i}.json" --write-out '%{http_code}'               --request POST 'https://play-ai.cc/api/ig/stage-media'               --header 'Content-Type: application/json'               --header 'Origin: https://play-ai.cc'               --header 'Sec-Fetch-Site: same-origin'               --data-binary @/tmp/body.json || true)"
+            echo "slide=$i stage_http=$code"
+            cat "/tmp/stage-${i}.json"
+            test "$code" = "200"
+            jq -e '.success == true and .url' "/tmp/stage-${i}.json" >/dev/null
+            jq --argjson index "$i" --slurpfile response "/tmp/stage-${i}.json"               '. + [{index:$index,url:$response[0].url,key:$response[0].key}]'               sep27-r2-results.json > /tmp/results.json
+            mv /tmp/results.json sep27-r2-results.json
+          done
+          cat sep27-r2-results.json
+
+      - name: Verify R2 URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -r '.[].url' sep27-r2-results.json | while IFS= read -r u; do
+            code="$(curl -L --silent --show-error --output /dev/null --write-out '%{http_code}' --max-time 30 "$u")"
+            echo "$code $u"
+            test "$code" = "200"
+          done
+
+      - name: Persist links
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-r2-results.json
+          git commit -m "ops: capture Sep27 corrected R2 URLs" || true
+          git push
