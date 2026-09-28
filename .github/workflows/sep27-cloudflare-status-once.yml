@@ -22,12 +22,12 @@ jobs:
           echo '=== PLAN ==='
           jq '{
             instagram:{
-              status:.data.instagram.status,
-              renderedCount:.data.instagram.renderedCount,
-              caption:.data.instagram.caption,
-              hashtags:.data.instagram.hashtags,
-              plannedSlides:.data.instagram.plannedSlides,
-              slides:.data.instagram.slides
+              status:.instagram.status,
+              renderedCount:.instagram.renderedCount,
+              caption:.instagram.caption,
+              hashtags:.instagram.hashtags,
+              plannedSlides:.instagram.plannedSlides,
+              slides:.instagram.slides
             }
           }' /tmp/status.json
           echo '=== IMAGE/PLAN EVENTS ==='
@@ -37,3 +37,5 @@ jobs:
             | @tsv' /tmp/status.json
 
 # plan-evidence 1790585548833
+
+# root-fix 1790585581568
