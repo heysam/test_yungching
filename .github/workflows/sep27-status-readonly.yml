@@ -1,0 +1,21 @@
+name: Sep27 Status Readonly
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-status-readonly.yml"
+permissions:
+  contents: read
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read current Sep27 status
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 30             "https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"             -o /tmp/status.json
+          jq '{success,ready,contentId,blog,instagram,run}' /tmp/status.json
+          curl --fail-with-body --silent --show-error --max-time 30             'https://play-ai.cc/api/content-v2/status?date=2026-09-27&contentId=blog-ig%3A2026-09-27%3A1%3A68'             -o /tmp/content.json
+          echo "=== EVENTS ==="
+          jq -r '.run.events[]? | [(.createdAt//""),(.stage//""),(.status//""),(.provider//""),(.model//""),((.httpStatus//"")|tostring),(.errorCode//""),(.errorMessage//"")] | @tsv' /tmp/content.json
