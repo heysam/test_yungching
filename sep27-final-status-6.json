@@ -1,0 +1,122 @@
+{
+  "success": true,
+  "action": "status",
+  "contentId": "blog-ig:2026-09-27:1:68",
+  "blogSlug": "ai-note-20260927-1vammfp",
+  "blogTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+  "instagramStatus": "planned",
+  "renderedCount": 0,
+  "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，為 Anthropic 前沿文字與 agent 模型。Fable 5.1 與 Mythos 5.1 於 9 月 1 日發布，為同底層模型的不同安全層級版本。Opus 4.6 於 2 月 5 日發布，具 100 萬 token 視窗與 64 專家 MoE 架構，單 token 激活 40–60 億參數，HumanEval 達 94.2% pass@1，支援 Computer Use 與 Artifacts。Qwen3-Max-2026-01-23 最高支援 256K 輸入 token，採分級計價且不支援 context caching 或 fine-tuning。兩模型皆為閉源權重，僅透過雲端 API 提供服務。Claude 系列採 Constitutional AI 對齊，透過原則文件提升倫理合規。代理能力含 Claude Code（CLI）與 Claude Cowork（GUI），支援自然語言編碼與沙盒桌面操作。觀察重點含 Opus 5 的 3D 渲染、Mythos 5.1 受限存取計畫，以及長上下文推理的成本效能平衡。",
+  "hashtags": [
+    "#ClaudeOpus5",
+    "#Qwen3Max",
+    "#Anthropic",
+    "#AI模型比較",
+    "#AgenticAI",
+    "#ConstitutionalAI"
+  ],
+  "captionWithHashtags": "Claude Opus 5 於 2026 年 7 月 24 日發布，為 Anthropic 前沿文字與 agent 模型。Fable 5.1 與 Mythos 5.1 於 9 月 1 日發布，為同底層模型的不同安全層級版本。Opus 4.6 於 2 月 5 日發布，具 100 萬 token 視窗與 64 專家 MoE 架構，單 token 激活 40–60 億參數，HumanEval 達 94.2% pass@1，支援 Computer Use 與 Artifacts。Qwen3-Max-2026-01-23 最高支援 256K 輸入 token，採分級計價且不支援 context caching 或 fine-tuning。兩模型皆為閉源權重，僅透過雲端 API 提供服務。Claude 系列採 Constitutional AI 對齊，透過原則文件提升倫理合規。代理能力含 Claude Code（CLI）與 Claude Cowork（GUI），支援自然語言編碼與沙盒桌面操作。觀察重點含 Opus 5 的 3D 渲染、Mythos 5.1 受限存取計畫，以及長上下文推理的成本效能平衡。\n\n#ClaudeOpus5 #Qwen3Max #Anthropic #AI模型比較 #AgenticAI #ConstitutionalAI",
+  "planSlides": [
+    {
+      "index": 1,
+      "role": "cover",
+      "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+      "topicTag": "模型發布",
+      "headline": "Claude Opus 5 與 Qwen3-Max 2026 比較",
+      "highlight": "2026 比較",
+      "subheadline": "Claude Opus 5 於 2026 年 7 月 24 日發布，為 Anthropic 前沿模型。",
+      "bullets": [
+        "Claude Opus 5 於 2026 年 7 月 24 日發布。",
+        "Fable 5.1 與 Mythos 5.1 於 9 月 1 日發布。",
+        "Qwen3-Max 為 2026 年 1 月 23 日快照版本。"
+      ],
+      "takeaway": "三款模型皆為閉源權重，僅透過雲端 API 提供服務。",
+      "cta": "",
+      "visualPrompt": "Split screen showing Anthropic and Alibaba Cloud logos with timeline of 2026 model releases",
+      "layout": "cover",
+      "altText": "Timeline visual of Claude Opus 5 (July 2026), Fable/Mythos 5.1 (Sept 2026), and Qwen3-Max (Jan 2026)"
+    },
+    {
+      "index": 2,
+      "role": "context",
+      "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+      "topicTag": "上下文視窗",
+      "headline": "Claude Opus 4.6 上下文視窗達 100 萬 token",
+      "highlight": "100 萬 token",
+      "subheadline": "2026 年 2 月 5 日發布，具備長上下文 beta 能力。",
+      "bullets": [
+        "上下文視窗達 100 萬 token，為前代 4 倍。",
+        "採 64 專家 MoE 架構，總參數超過 3000 億。",
+        "單 token 僅激活 40–60 億參數。",
+        "Qwen3-Max 最高支援 256K 輸入 token。"
+      ],
+      "takeaway": "Claude Opus 4.6 上下文視窗顯著優於 Qwen3-Max。",
+      "cta": "",
+      "visualPrompt": "Horizontal bar chart comparing context window sizes: Claude Opus 4.6 (1M), Qwen3-Max (256K), Claude 2.1 (200K)",
+      "layout": "context",
+      "altText": "Bar chart showing context window: Claude Opus 4.6 1M tokens, Qwen3-Max 256K, Claude 2.1 200K"
+    },
+    {
+      "index": 3,
+      "role": "key-points",
+      "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+      "topicTag": "效能基準",
+      "headline": "Claude Opus 4.6 HumanEval 達 94.2%",
+      "highlight": "94.2%",
+      "subheadline": "在 HumanEval Python 程式基準上達到 94.2% pass@1。",
+      "bullets": [
+        "MATH 數據集準確率達 88.7%，代數幾何表現最佳。",
+        "MMLU 基準 57 科目準確率達 91.3%。",
+        "展現業界領先的 agentic coding 能力。",
+        "Qwen3-Max 思考模式支援 Web 搜尋與 Code Interpreter。"
+      ],
+      "takeaway": "Claude Opus 4.6 在程式與推理基準上表現優異。",
+      "cta": "",
+      "visualPrompt": "Radar chart comparing Claude Opus 4.6 and Qwen3-Max on HumanEval, MATH, MMLU axes",
+      "layout": "key-points",
+      "altText": "Radar chart: Claude Opus 4.6 scores higher than Qwen3-Max on coding and reasoning benchmarks"
+    },
+    {
+      "index": 4,
+      "role": "application",
+      "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+      "topicTag": "代理能力",
+      "headline": "Claude Opus 4.6 支援 Computer Use 與 Artifacts",
+      "highlight": "Computer Use 與 Artifacts",
+      "subheadline": "支援 Computer Use 互動 GUI、瀏覽器與桌面應用。",
+      "bullets": [
+        "Artifacts 功能可即時渲染程式碼片段與文件。",
+        "Claude Code 為 CLI 代理工具，支援自然語言編碼任務。",
+        "Claude Cowork 為 GUI 代理工具，提供沙盒化桌面操作。",
+        "Opus 4.6 於 2026 年 2 月引入 agent teams 能力。"
+      ],
+      "takeaway": "Claude Opus 4.6 代理工具鏈支援全流程自動化任務。",
+      "cta": "",
+      "visualPrompt": "Desktop screenshot with Claude interacting via Computer Use, showing mouse cursor and code Artifacts window",
+      "layout": "application",
+      "altText": "GUI showing Claude using Computer Use to click buttons and Artifacts panel rendering live code"
+    },
+    {
+      "index": 5,
+      "role": "summary-cta",
+      "topicTitle": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+      "topicTag": "模型定位",
+      "headline": "Claude 系列採 Constitutional AI 對齊",
+      "highlight": "Constitutional AI",
+      "subheadline": "Claude 系列為閉源權重模型，僅透過 Anthropic API 提供服務。",
+      "bullets": [
+        "採 Constitutional AI 對齊，以原則文件提升倫理合規性。",
+        "模型分層為 Haiku、Sonnet、Opus 三級架構。",
+        "Opus 5 於 2026 年 7 月引入 3D 渲染能力。",
+        "Qwen3-Max 僅透過 Model Studio 提供託管 API 服務。"
+      ],
+      "takeaway": "",
+      "cta": "閱讀完整比較分析，了解架構與應用差異",
+      "visualPrompt": "Abstract scale balancing Constitutional AI scroll vs cloud API tokens, with 3D render and tool icons",
+      "layout": "summary-cta",
+      "altText": "Symbolic scale: Constitutional AI document on one side, cloud tokens and 3D cube on the other"
+    }
+  ],
+  "slides": [],
+  "published": null
+}
