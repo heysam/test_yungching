@@ -1,2 +1,2 @@
-2026-09-28T02:34:06.291Z	runner-start	started	cloudflare-worker					{"manual":true,"blogOnly":false,"manualExport":true,"requestedContentId":"blog-ig:2026-09-27:1:68"}
-2026-09-28T02:34:11.688Z	instagram-plan	started						{"transport":"worker-local","path":"/api/content-v2/daily"}
+2026-09-28T08:36:21.003Z	runner-start	started	cloudflare-worker					{"manual":true,"blogOnly":false,"manualExport":true,"requestedContentId":"blog-ig:2026-09-27:1:68"}
+2026-09-28T08:36:26.909Z	instagram-plan	started						{"transport":"worker-local","path":"/api/content-v2/daily"}

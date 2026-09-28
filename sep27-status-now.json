@@ -20,7 +20,7 @@
     "updatedAt": null
   },
   "run": {
-    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685428",
+    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59686152",
     "status": "running",
     "currentStage": "instagram-plan",
     "failedStage": null,
@@ -28,7 +28,7 @@
     "errorCode": null,
     "errorMessage": null,
     "retryable": null,
-    "updatedAt": "2026-09-28T02:34:11.688Z",
+    "updatedAt": "2026-09-28T08:36:26.909Z",
     "completedAt": null,
     "summary": {
       "manual": true,
