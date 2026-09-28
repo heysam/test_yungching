@@ -54,3 +54,5 @@ jobs:
           git add sep27-cloudflare-result.json sep27-trigger.json
           git commit -m "ops: capture Sep27 Cloudflare IG export result" || true
           git push
+
+# rerun production Sep27 after Cloudflare native deploy 1790584568601
