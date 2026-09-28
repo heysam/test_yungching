@@ -1,0 +1,71 @@
+name: Sep27 Select Better IG Plan
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-select-better-plan.yml"
+permissions:
+  contents: write
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate until cover passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          : > sep27-plan-attempts.txt
+          passed=0
+          for attempt in $(seq 1 4); do
+            echo "=== attempt $attempt ===" | tee -a sep27-plan-attempts.txt
+            curl --fail-with-body --silent --show-error --max-time 60               "${base}?key=${key}&action=reset" -o "sep27-reset-${attempt}.json"
+            curl --fail-with-body --silent --show-error --max-time 180               "${base}?key=${key}&action=plan" -o "sep27-plan-${attempt}.json"
+
+            jq -r '.plan.slides[0] | {topicTag,headline,subheadline,bullets,takeaway}' "sep27-plan-${attempt}.json" | tee -a sep27-plan-attempts.txt
+            headline="$(jq -r '.plan.slides[0].headline // ""' "sep27-plan-${attempt}.json")"
+            tag="$(jq -r '.plan.slides[0].topicTag // ""' "sep27-plan-${attempt}.json")"
+            cover="$(jq -r '[.plan.slides[0].headline,.plan.slides[0].subheadline,.plan.slides[0].bullets[]?,.plan.slides[0].takeaway] | join(" ")' "sep27-plan-${attempt}.json")"
+            caption="$(jq -r '.plan.caption // ""' "sep27-plan-${attempt}.json")"
+
+            if printf '%s %s' "$headline" "$tag" | grep -Eq '發布|發表|上線|20[0-9]{2}.*月|[0-9]{1,2} 月 [0-9]{1,2} 日'; then
+              echo "reject: cover date/release lead" | tee -a sep27-plan-attempts.txt
+              continue
+            fi
+            if printf '%s' "$cover" | grep -Eq '兩者.*閉源|均為閉源|都是閉源|閉源.*API服務|閉源 API'; then
+              echo "reject: generic closed/API cover point" | tee -a sep27-plan-attempts.txt
+              continue
+            fi
+            if printf '%s' "$cover" | grep -Fq 'Opus 4.6'; then
+              echo "reject: previous-generation data in cover" | tee -a sep27-plan-attempts.txt
+              continue
+            fi
+            if printf '%s' "$caption" | grep -Eq '僅透過託管 API 提供服務|兩者均為閉源 API|兩者皆為閉源 API'; then
+              echo "reject: overbroad API-only caption" | tee -a sep27-plan-attempts.txt
+              continue
+            fi
+            hits="$(printf '%s' "$cover" | grep -Eo '上下文|context|agent|代理|工具|搜尋|Code|Computer|MoE|HumanEval|成本|token|推理|編碼|GUI|Web' | wc -l | tr -d ' ')"
+            if [ "${hits:-0}" -lt 2 ]; then
+              echo "reject: insufficient high-salience capability signals" | tee -a sep27-plan-attempts.txt
+              continue
+            fi
+            cp "sep27-plan-${attempt}.json" sep27-selected-plan.json
+            echo "SELECTED_ATTEMPT=$attempt" | tee -a sep27-plan-attempts.txt
+            passed=1
+            break
+          done
+          test "$passed" = "1"
+          jq '{contentId,model,caption:.plan.caption,hashtags:.plan.hashtags,cover:.plan.slides[0],slide2:.plan.slides[1],slide3:.plan.slides[2],slide4:.plan.slides[3],slide5:.plan.slides[4]}' sep27-selected-plan.json
+
+      - name: Persist selected plan
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sep27-plan-attempts.txt sep27-selected-plan.json sep27-plan-*.json sep27-reset-*.json 2>/dev/null || true
+          git commit -m "ops: capture selected Sep27 IG plan" || true
+          git push
