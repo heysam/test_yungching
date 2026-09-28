@@ -27,7 +27,7 @@
     "updatedAt": "2026-09-27T22:13:47.353Z"
   },
   "run": {
-    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685285",
+    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
     "status": "failed",
     "currentStage": "instagram-image-1",
     "failedStage": "instagram-image-1",
@@ -35,8 +35,8 @@
     "errorCode": "pipeline-stage-failed",
     "errorMessage": "NVIDIA FLUX.2-klein-4B 沒有回傳可用 image artifact",
     "retryable": false,
-    "updatedAt": "2026-09-28T01:23:06.544Z",
-    "completedAt": "2026-09-28T01:23:06.544Z",
+    "updatedAt": "2026-09-28T01:23:36.290Z",
+    "completedAt": "2026-09-28T01:23:36.290Z",
     "summary": {
       "task": "blog-ig-daily",
       "version": "v3",
@@ -142,11 +142,11 @@
               "updatedAt": "2026-09-27T22:13:47.353Z"
             },
             "run": {
-              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685285",
+              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
               "contentId": "blog-ig:2026-09-27:1:68",
               "mode": "publish",
               "triggerSource": "cloudflare-workflow-manual",
-              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685285",
+              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685286",
               "status": "running",
               "currentStage": "runner-start",
               "failedStage": null,
@@ -154,8 +154,8 @@
               "errorCode": null,
               "errorMessage": null,
               "retryable": null,
-              "startedAt": "2026-09-28T01:22:52.185Z",
-              "updatedAt": "2026-09-28T01:22:52.382Z",
+              "startedAt": "2026-09-28T01:23:21.620Z",
+              "updatedAt": "2026-09-28T01:23:21.846Z",
               "completedAt": null,
               "summary": {
                 "manual": "[truncated-depth]",
@@ -184,7 +184,7 @@
                 "[truncated-depth]"
               ]
             },
-            "updatedAt": "2026-09-28T01:22:52.382Z"
+            "updatedAt": "2026-09-28T01:23:21.846Z"
           },
           "reused": true
         },
