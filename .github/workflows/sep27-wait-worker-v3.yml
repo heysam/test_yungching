@@ -44,3 +44,5 @@ jobs:
           git add sep27-worker-v3-probe.txt sep27-worker-v3-state.json 2>/dev/null || true
           git commit -m "ops: capture Sep27 Worker V3 deploy evidence" || true
           git push
+
+# retrigger 1790579995518 worker-v3
