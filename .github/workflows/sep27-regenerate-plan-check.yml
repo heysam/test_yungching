@@ -29,3 +29,5 @@ jobs:
           git add sep27-reset.json sep27-plan.json
           git commit -m "ops: capture Sep27 regenerated plan" || true
           git push
+
+# rerun 1790584097291 sep25-background-contract
