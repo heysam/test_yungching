@@ -1,0 +1,117 @@
+name: Sep27 Strict Formal Regenerate
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/sep27-strict-formal-regenerate.yml"
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reset old IG derivative only
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          code="$(curl --silent --show-error --max-time 60 -o sep27-strict-reset.json -w '%{http_code}'             "${base}?key=${key}&action=reset" || true)"
+          echo "RESET_HTTP=$code"
+          cat sep27-strict-reset.json
+          test "$code" = "200"
+          jq -e '.success == true' sep27-strict-reset.json >/dev/null
+
+      - name: Trigger canonical manual export
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-trigger-27c4f1"
+          code="$(curl --silent --show-error --max-time 45 -X POST -o sep27-strict-trigger.json -w '%{http_code}' "$trigger" || true)"
+          echo "TRIGGER_HTTP=$code"
+          cat sep27-strict-trigger.json
+          test "$code" = "200"
+          jq -e '.success == true' sep27-strict-trigger.json >/dev/null
+
+      - name: Poll to 5 of 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="https://playai-voicechat-watchdog.itissam.workers.dev/__ops/sep27-ig-direct-export-status-27c4f1"
+          : > sep27-strict-progress.txt
+          ready=0
+          for n in $(seq 1 180); do
+            code="$(curl --silent --show-error --max-time 30 -o /tmp/state.json -w '%{http_code}' "$status" || true)"
+            count="$(jq -r '.instagram.renderedCount // 0' /tmp/state.json 2>/dev/null || echo 0)"
+            rs="$(jq -r '.run.status // ""' /tmp/state.json 2>/dev/null || true)"
+            stage="$(jq -r '.run.currentStage // ""' /tmp/state.json 2>/dev/null || true)"
+            err="$(jq -r '.run.errorCode // ""' /tmp/state.json 2>/dev/null || true)"
+            echo "$(date -u +%FT%TZ) try=$n http=$code count=$count run=$rs stage=$stage err=$err" | tee -a sep27-strict-progress.txt
+            if [ "$code" = "200" ] && [ "$(jq -r '.ready // false' /tmp/state.json)" = "true" ] && [ "$count" = "5" ]; then
+              cp /tmp/state.json sep27-strict-final.json
+              ready=1
+              break
+            fi
+            case "$rs" in
+              failed|error|errored|terminated|cancelled|canceled)
+                cp /tmp/state.json sep27-strict-final.json
+                echo "terminal failure"
+                cat sep27-strict-final.json
+                exit 1
+                ;;
+            esac
+            sleep 8
+          done
+          test "$ready" = "1"
+
+      - name: Reject any reused or Hero fallback background
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(jq -r '.instagram.renderedCount' sep27-strict-final.json)" = "5"
+          test "$(jq -r '[.instagram.slides[].mediaUrl] | unique | length' sep27-strict-final.json)" = "5"
+          bad="$(jq '[.instagram.slides[] | select(
+            (.imageProvider // "") == "published-blog-hero-fallback" or
+            (.imageProvider // "") == "reused-existing-slide-background" or
+            (.imageModel // "") == "existing-published-blog-hero" or
+            (.imageModel // "") == "reused-existing-carousel-background"
+          )] | length' sep27-strict-final.json)"
+          echo "BAD_BACKGROUND_REUSE_COUNT=$bad"
+          jq -r '.instagram.slides[] | [.index,.imageProvider,.imageModel,.mediaUrl] | @tsv' sep27-strict-final.json
+          test "$bad" = "0"
+
+      - name: Read actual plan and caption
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://play-ai.cc/api/ops/sep27-ig-regenerate-9f27c4"
+          key="sep27-9f27c4-regenerate-export"
+          curl --fail-with-body --silent --show-error --max-time 30             "${base}?key=${key}&action=status" -o sep27-strict-plan-status.json
+          jq '{contentId,instagramStatus,renderedCount,caption,hashtags,captionWithHashtags,planSlides,slides}' sep27-strict-plan-status.json
+
+      - name: Download all five for visual QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p sep27-strict-images
+          for i in 1 2 3 4 5; do
+            url="$(jq -r --argjson i "$i" '.instagram.slides[] | select(.index==$i) | .mediaUrl' sep27-strict-final.json)"
+            test -n "$url"
+            curl --fail-with-body --silent --show-error --max-time 60 "$url" -o "sep27-strict-images/slide-${i}.jpg"
+            test -s "sep27-strict-images/slide-${i}.jpg"
+          done
+
+      - name: Persist strict evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git reset --soft origin/master
+          git add sep27-strict-*.json sep27-strict-progress.txt sep27-strict-images/*.jpg 2>/dev/null || true
+          git commit -m "ops: capture Sep27 strict formal regeneration" || true
+          git push
