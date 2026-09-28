@@ -11,32 +11,42 @@
     "publishedAt": "2026-09-27T13:17:43.006Z"
   },
   "instagram": {
-    "status": "planned",
-    "renderedCount": 0,
-    "slides": [],
-    "caption": "Claude Opus 5 於 2026 年 7 月 24 日發布，具備 1M token 上下文與 64 專家 MoE 架構；Qwen3-Max 以 256K 上下文與思考模式整合工具鏈見長。兩者皆為閉源權重，僅透過託管 API 提供服務。Claude Opus 5 藉 deliberative reasoning pipeline 與 Computer Use 在多步驟程式與 GUI 互動上領先；Qwen3-Max 思考模式支援 Web 搜尋與 Code Interpreter。安全層級方面，Claude Fable 5.1 與 Mythos 5.1 於 2026 年 9 月 1 日同步發布，前者一般可用，後者僅限可信存取計畫。Qwen3-Max 按輸入長度分級計價，Claude 系列未公開同等細部分層定價。Claude Opus 5 在極長上下文與深度推理具架構優勢，Qwen3-Max 在中文工具基線與思考模式彈性具競爭力。",
+    "status": "rendering",
+    "renderedCount": 1,
+    "slides": [
+      {
+        "index": 1,
+        "role": "cover",
+        "mediaUrl": "https://worker.internal/api/ig/media/image/1790585264937-a7fa63c8-01bc-4242-b28d-b91793165a00.jpg",
+        "altText": "Split-screen visual comparing Claude Opus 5 and Qwen3-Max: left side shows a large 1M token context window with Claude。",
+        "renderer": "cloudflare-browser-run-carousel-v3",
+        "imageProvider": null,
+        "imageModel": "black-forest-labs/flux.2-klein-4b"
+      }
+    ],
+    "caption": "Claude Opus 5 與 Qwen3-Max 在架構、上下文窗口與代理能力上的差異正成為 2026 年模型選型的關鍵參考。本文從發布時間、技術機制到實際應用影響，梳理兩者在長文件處理、工具使用與成本結構上的具體表現，幫助開發者與企業決策者理解何時該選擇哪一方案。透過對比 Anthropic 與阿里雲的最新閉源模型，我們看見未來 AI 代理在複雜任務中的分工趨勢與技術邊界。",
     "hashtags": [
       "#ClaudeOpus5",
       "#Qwen3Max",
       "#AI模型比較",
-      "#Anthropic",
-      "#阿里雲",
-      "#代理AI"
+      "#代理能力",
+      "#上下文窗口",
+      "#Anthropic"
     ],
     "lastFailure": null,
-    "updatedAt": "2026-09-28T02:52:12.678Z"
+    "updatedAt": "2026-09-28T08:47:46.077Z"
   },
   "run": {
-    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685443",
+    "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59686186",
     "status": "failed",
-    "currentStage": "instagram-render-quick-action-1",
-    "failedStage": "instagram-plan",
-    "provider": "cloudflare-browser",
-    "errorCode": "workers-ai-quota-exhausted",
-    "errorMessage": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 ",
+    "currentStage": "instagram-image-2",
+    "failedStage": "instagram-image-2",
+    "provider": "cloudflare-worker",
+    "errorCode": "pipeline-stage-failed",
+    "errorMessage": "NVIDIA FLUX.2-klein-4B 沒有回傳可用 image artifact",
     "retryable": false,
-    "updatedAt": "2026-09-28T02:52:21.031Z",
-    "completedAt": "2026-09-28T02:50:31.439Z",
+    "updatedAt": "2026-09-28T08:53:28.293Z",
+    "completedAt": "2026-09-28T08:53:28.293Z",
     "summary": {
       "task": "blog-ig-daily",
       "version": "v3",
@@ -88,7 +98,7 @@
               "blog": true,
               "hero": true,
               "articleVisuals": true,
-              "socialPlan": false,
+              "socialPlan": true,
               "rendered": false,
               "blogPublished": true,
               "instagramPublished": false
@@ -110,15 +120,30 @@
               "updatedAt": "2026-09-27T13:17:43.006Z"
             },
             "instagram": {
-              "status": null,
-              "planned": false,
-              "postType": null,
-              "theme": null,
-              "caption": null,
-              "hashtags": [],
-              "plannedSlides": [],
-              "renderedCount": 0,
-              "slides": [],
+              "status": "rendering",
+              "planned": true,
+              "postType": "knowledge",
+              "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "caption": "Claude Opus 5 與 Qwen3-Max 在架構、上下文窗口與代理能力上的差異正成為 2026 年模型選型的關鍵參考。本文從發布時間、技術機制到實際應用影響，梳理兩者在長文件處理、工具使用與成本結構上的具體表現，幫助開發者與企業決策者理解何時該選擇哪一方案。透過對比 Anthropic 與阿里雲的最新閉源模型，我們看見未來 AI 代理在複雜任務中的分工趨勢與技術邊界。",
+              "hashtags": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "plannedSlides": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "renderedCount": 1,
+              "slides": [
+                "[truncated-depth]"
+              ],
               "mediaId": null,
               "permalink": null,
               "carouselContainerId": null,
@@ -126,14 +151,14 @@
               "confirmationMethod": null,
               "publishedAt": null,
               "lastFailure": null,
-              "updatedAt": null
+              "updatedAt": "2026-09-28T08:47:46.077Z"
             },
             "run": {
-              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685443",
+              "runId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59686186",
               "contentId": "blog-ig:2026-09-27:1:68",
               "mode": "publish",
               "triggerSource": "cloudflare-workflow-manual",
-              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59685443",
+              "workflowInstanceId": "blog-ig-manual-export-blog-ig-2026-09-27-1-68-r-59686186",
               "status": "running",
               "currentStage": "runner-start",
               "failedStage": null,
@@ -141,8 +166,8 @@
               "errorCode": null,
               "errorMessage": null,
               "retryable": null,
-              "startedAt": "2026-09-28T02:41:58.250Z",
-              "updatedAt": "2026-09-28T02:41:58.529Z",
+              "startedAt": "2026-09-28T08:53:10.160Z",
+              "updatedAt": "2026-09-28T08:53:10.446Z",
               "completedAt": null,
               "summary": {
                 "manual": "[truncated-depth]",
@@ -171,7 +196,7 @@
                 "[truncated-depth]"
               ]
             },
-            "updatedAt": "2026-09-28T02:41:58.529Z"
+            "updatedAt": "2026-09-28T08:53:10.446Z"
           },
           "reused": true
         },
@@ -203,16 +228,70 @@
           }
         ],
         "instagramPlan": {
-          "ok": false,
-          "status": 429,
-          "upstreamStatus": 429,
+          "ok": true,
+          "status": 200,
+          "upstreamStatus": 200,
           "stage": "instagram-plan",
           "attempt": 1,
           "data": {
-            "success": false,
+            "success": true,
             "runMode": "plan",
-            "failedStage": "instagram-plan",
-            "error": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 ",
+            "contentId": "blog-ig:2026-09-27:1:68",
+            "mode": "knowledge",
+            "topic": "Model Deep Dive｜Anthropic Claude：以研究當下最新正式可用版本為準，深入研究版本演進、已公開架構與參數資訊、上下文與多模態能力、reasoning、tool/function calling、agent/coding 能力、官方 benchmark 與可信第三方評測、推論速度與成本、API 價格、open/closed weight 與授權、部署方式、最適合與不適合的任務、已知限制與失敗模式，並和上一代及主要競品做有來源的差異比較。優先引用官方文件、model/system card、technical report、API pricing/release notes；未公開資訊不可猜測。",
+            "blog": {
+              "slug": "ai-note-20260927-1vammfp",
+              "status": "published",
+              "mode": "knowledge",
+              "title": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "excerpt": "Claude Opus 5 於 2026 年 7 月 24 日發布，為 Anthropic 在該時間點的前沿文字與 agent 對手模型。 Claude Fable 5.1 與 Claude Mythos 5.1 均於 2026 年 9 月 1 日發布，為同一底層模型的不同安全防護層級版本：Fable 5.1 為一般可用版，Mythos 5.1 僅透過可信存取計畫提供，主要面向資安與生命科學研究。",
+              "blocks": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "heroUrl": "/api/ig/media/image/1790515060643-f910c2bb-3895-48a0-a501-207c04a0c6e5.jpg",
+              "publishedAt": "2026-09-27T13:17:43.006Z"
+            },
+            "socialPlan": {
+              "postType": "knowledge",
+              "theme": "Claude Opus 5 與 Qwen3-Max：2026 年閉源模型架構、上下文與代理能力比較",
+              "caption": "Claude Opus 5 與 Qwen3-Max 在架構、上下文窗口與代理能力上的差異正成為 2026 年模型選型的關鍵參考。本文從發布時間、技術機制到實際應用影響，梳理兩者在長文件處理、工具使用與成本結構上的具體表現，幫助開發者與企業決策者理解何時該選擇哪一方案。透過對比 Anthropic 與阿里雲的最新閉源模型，我們看見未來 AI 代理在複雜任務中的分工趨勢與技術邊界。",
+              "hashtags": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ],
+              "captionWithHashtags": "Claude Opus 5 與 Qwen3-Max 在架構、上下文窗口與代理能力上的差異正成為 2026 年模型選型的關鍵參考。本文從發布時間、技術機制到實際應用影響，梳理兩者在長文件處理、工具使用與成本結構上的具體表現，幫助開發者與企業決策者理解何時該選擇哪一方案。透過對比 Anthropic 與阿里雲的最新閉源模型，我們看見未來 AI 代理在複雜任務中的分工趨勢與技術邊界。 #ClaudeOpus5 #Qwen3Max #AI模型比較 #代理能力 #上下文窗口 #Anthropic",
+              "slides": [
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]",
+                "[truncated-depth]"
+              ]
+            },
             "stages": {
               "topic": {
                 "status": "[truncated-depth]",
@@ -234,19 +313,57 @@
                 "status": "[truncated-depth]",
                 "reason": "[truncated-depth]"
               },
-              "failed": {
+              "social": {
                 "status": "[truncated-depth]",
-                "stage": "[truncated-depth]",
-                "error": "[truncated-depth]"
+                "reused": "[truncated-depth]",
+                "ms": "[truncated-depth]",
+                "slides": "[truncated-depth]",
+                "review": "[truncated-depth]",
+                "models": "[truncated-depth]"
               }
             }
           },
-          "quotaExhausted": true,
-          "errorCode": "workers-ai-quota-exhausted",
+          "quotaExhausted": false,
+          "errorCode": "pipeline-stage-failed",
           "diagnostic": null,
           "retryable": false,
-          "error": "Formal IG carousel plan 失敗：carousel-generation-contract: IG carousel generation contract violation: slide 1 headline 現在是 49 字，請改成少於 45 字; slide 1 subheadline 現在是 127 字，請改成少於 57 字; slide 1 bullet 1 現在是 56 字，請改成少於 49 字; slide 1 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 headline 現在是 69 字，請改成少於 45 字; slide 2 subheadline 現在是 130 字，請改成少於 57 字; slide 2 takeaway 現在是 47 字，請改成少於 41 字; slide 2 bullet 1 現在是 68 字，請改成少於 49 字; slide 2 bullet 2 現在是 62 字，請改成少於 49 字; slide 2 bullet 3 現在是 61 字，請改成少於 49 字; slide 3 headline 現在是 50 字，請改成少於 45 字; slide 3 subheadline 現在是 70 字，請改成少於 57 字; slide 3 takeaway 現在是 43 字，請改成少於 41 字; slide 3 bullet 1 現在是 72 字，請改成少於 49 字; slide 3 bullet 2 現在是 70 字，請改成少於 49 字; slide 3 bullet 3 現在是 63 字，請改成少於 49 字; slide 3 bullet 4 現在是 65 字，請改成少於 49 字; slide 4 headline 現在是 46 字，請改成少於 45 字; slide 4 subheadline 現在是 77 字，請改成少於 57 字; slide 4 takeaway 現在是 58 字，請改成少於 41 字; slide 4 bullet 1 現在是 86 字，請改成少於 49 字; slide 4 bullet 2 現在是 185 字，請改成少於 49 字; slide 4 bullet 3 現在是 141 字，請改成少於 49 字; slide 4 bullet 4 現在是 70 字，請改成少於 49 字; slide 5 headline 現在是 74 字，請改成少於 45 字; slide 5 subheadline 現在是 75 字，請改成少於 57 字; slide 5 bullet 1 現在是 74 字，請改成少於 49 字; slide 5 bullet 2 現在是 83 字，請改成少於 49 字; slide 5 bullet 3 "
-        }
+          "error": null
+        },
+        "instagramRender": [
+          {
+            "ok": true,
+            "status": 200,
+            "upstreamStatus": 200,
+            "stage": "instagram-render-prepare-2",
+            "attempt": 1,
+            "data": {
+              "success": true,
+              "contentId": "blog-ig:2026-09-27:1:68",
+              "slug": "ai-note-20260927-1vammfp",
+              "complete": false,
+              "renderedCount": 1,
+              "renderSpec": {
+                "version": "[truncated-depth]",
+                "output": "[truncated-depth]",
+                "brand": "[truncated-depth]",
+                "slide": "[truncated-depth]",
+                "image": "[truncated-depth]"
+              },
+              "metadata": {
+                "index": "[truncated-depth]",
+                "role": "[truncated-depth]",
+                "altText": "[truncated-depth]",
+                "templateVersion": "[truncated-depth]",
+                "imageModel": "[truncated-depth]"
+              }
+            },
+            "quotaExhausted": false,
+            "errorCode": "pipeline-stage-failed",
+            "diagnostic": null,
+            "retryable": false,
+            "error": null
+          }
+        ]
       }
     }
   }
